@@ -8,7 +8,6 @@ public class Login extends JFrame implements ActionListener {
     JTextField textField, textField_1;
     JPasswordField pintextField;
     Login(){
-        
 
         setLayout(null);
         
@@ -92,7 +91,8 @@ public class Login extends JFrame implements ActionListener {
         } else if (e.getSource() == login) {
             
         } else if (e.getSource() == SignUP) {
-
+            setVisible(false);
+            new signupOne().setVisible(true);
         }
     }
     
