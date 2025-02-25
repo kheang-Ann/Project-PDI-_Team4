@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+
 import javax.swing.*;
 
 public class Login extends JFrame implements ActionListener {
@@ -7,6 +9,7 @@ public class Login extends JFrame implements ActionListener {
     JButton login, clear, SignUP;
     JTextField textField, textField_1;
     JPasswordField pintextField;
+    JLabel text, loginScreen, Card_num, password;
     Login(){
 
         setLayout(null);
@@ -15,40 +18,40 @@ public class Login extends JFrame implements ActionListener {
         Image l2 = l1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
         ImageIcon l3 = new ImageIcon(l2);
         JLabel label = new JLabel(l3);
-        label.setBounds(70, 10, 100, 100);
+        label.setBounds(80, 10, 100, 100);
         add(label);
 
         
         setSize(800, 480);
-        setVisible(true);
-        setTitle("Bank account system");
+        setTitle("Bank Account System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         
         ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
         setIconImage(image.getImage());
 
         //welcome Screen
-        JLabel text = new JLabel("Welcome to my Bank Company");
+        text = new JLabel("Welcome to my Bank Company");
         text.setFont(new Font("Tahoma", Font.BOLD, 25));
-        text.setBounds(250, 40, 800, 40);
+        text.setBounds(200, 40, 800, 40);
         add(text);
         
         //Login screen
-        JLabel loginScreen = new JLabel("Login Screen");
+        loginScreen = new JLabel("Login Screen");
         loginScreen.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        loginScreen.setBounds(400, 80, 400, 40);
+        loginScreen.setBounds(330, 80, 400, 40);
         getContentPane().add(loginScreen);
 
         //Fill username
-        JLabel username = new JLabel("Card No:");
-        username.setFont(new Font("Raleway", Font.BOLD, 20));
-        username.setBounds(100, 160,100,40);
-        getContentPane().add(username);
+        Card_num = new JLabel("Card No:");
+        Card_num.setFont(new Font("Raleway", Font.BOLD, 20));
+        Card_num.setBounds(100, 160,100,40);
+        getContentPane().add(Card_num);
 
         //Fill password
-        JLabel password = new JLabel("PIN:");
+        password = new JLabel("PIN:");
         password.setFont(new Font("Raleway", Font.BOLD, 20));
-        password.setBounds(140,240,50,40);
+        password.setBounds(145,240,50,40);
         getContentPane().add(password);
         
         //Text of the each username and password
@@ -82,6 +85,7 @@ public class Login extends JFrame implements ActionListener {
         SignUP.addActionListener(this);;
         getContentPane().add(SignUP);
 
+        setVisible(true);
     }
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == clear){
@@ -89,6 +93,23 @@ public class Login extends JFrame implements ActionListener {
             textField_1.setText("");
 
         } else if (e.getSource() == login) {
+            Bank bank = new Bank();
+            String cardnumber = textField.getText();
+            String pin = textField_1.getText();
+
+            String qucry = "select * from login where cardnumber = '"+cardnumber+"' and pin = '"+pin+"'";
+            try {
+                ResultSet set  = bank.s.executeQuery(qucry);
+                if(set.next()){
+                    setVisible(false);
+                    new Transaction(pin).setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Incorrect Card Number or Pin Number");
+                }
+                
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
             
         } else if (e.getSource() == SignUP) {
             setVisible(false);
