@@ -5,7 +5,7 @@ import javax.swing.*;
 public class Transaction extends JFrame implements ActionListener{
 
     JLabel Bank_acc;
-    JButton withdraw, deposit, Acc_list, exit;
+    JButton withdraw, deposit, Acc_list,transfer ,exit, changepin;
     String pin;
 
     Transaction(String pin){
@@ -33,27 +33,40 @@ public class Transaction extends JFrame implements ActionListener{
         Bank_acc.setBounds(265, 200,300,40);
         add(Bank_acc);
 
+        deposit = new JButton("Deposit");
+        deposit.setFont(new Font("Tahoma", Font.BOLD, 20));
+        deposit.setBounds(250,300,300,40);
+        deposit.addActionListener(this);
+        add(deposit);
+
         withdraw = new JButton("Withdraw");
         withdraw.setFont(new Font("Tahoma", Font.BOLD, 20));
-        withdraw.setBounds(250,300,300,40);
+        withdraw.setBounds(250,350,300,40);
         withdraw.addActionListener(this);
         add(withdraw);
         
-        deposit = new JButton("Deposit");
-        deposit.setFont(new Font("Tahoma", Font.BOLD, 20));
-        deposit.setBounds(250,350,300,40);
-        deposit.addActionListener(this);
-        add(deposit);
         
-        Acc_list = new JButton("Show account list");
+        transfer = new JButton("Transfer");
+        transfer.setFont(new Font("Tahoma", Font.BOLD, 20));
+        transfer.setBounds(250,400,300,40);
+        transfer.addActionListener(this);
+        add(transfer);
+
+        Acc_list = new JButton("Show list of users");
         Acc_list.setFont(new Font("Tahoma", Font.BOLD, 20));
-        Acc_list.setBounds(250,400,300,40);
+        Acc_list.setBounds(250,450,300,40);
         Acc_list.addActionListener(this);
         add(Acc_list);
+
+        changepin = new JButton("Change Pin");
+        changepin.setFont(new Font("Tahoma", Font.BOLD, 20));
+        changepin.setBounds(250,500,300,40);
+        changepin.addActionListener(this);
+        add(changepin);
         
         exit = new JButton("Exit");
         exit.setFont(new Font("Tahoma", Font.BOLD, 20));
-        exit.setBounds(250,450,300,40);
+        exit.setBounds(250,550,300,40);
         exit.addActionListener(this);
         add(exit);
         
@@ -68,6 +81,13 @@ public class Transaction extends JFrame implements ActionListener{
         } else if (ae.getSource() == withdraw){
             setVisible(false);
             new Withdraw(pin).setVisible(true);
+        } else if (ae.getSource() == transfer){
+
+        } else if(ae.getSource() == Acc_list){
+            
+        } else if(ae.getSource() == changepin){
+            setVisible(false);
+            new Pinchange(pin).setVisible(true);
         }
     }
     public static void main(String[] args) {
