@@ -20,12 +20,8 @@ public class Login extends JFrame implements ActionListener {
         label.setBounds(50, 0, 150, 150);
         add(label);
         
-        ImageIcon img = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\bank.jpg");
-        background = new JLabel("",img,JLabel.CENTER);
-        background.setBounds(0,0,706,480);
-        add(background);
 
-        setSize(720, 480);
+        setSize(780, 480);
         setTitle("Bank Account System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

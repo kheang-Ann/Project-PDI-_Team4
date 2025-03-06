@@ -17,13 +17,13 @@ public class Withdraw extends JFrame implements ActionListener {
         ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
         setIconImage(image.getImage());
 
-        setSize(500, 500);
+        setSize(530, 400);
         setLocation(300, 0);
         getContentPane().setBackground(Color.decode("#0BC7D2"));
         
         text = new JLabel("Withdraw");
         text.setFont(new Font("Tahoma", Font.BOLD, 25));
-        text.setBounds(200,10,200,40);
+        text.setBounds(195,10,200,40);
         add(text);
         
         amount = new JLabel("Amount: ");
@@ -39,13 +39,13 @@ public class Withdraw extends JFrame implements ActionListener {
         
         withdraw = new JButton("Withdraw");
         withdraw.setFont(new Font("Tahoma", Font.BOLD, 15));
-        withdraw.setBounds(190,200,150,40);
+        withdraw.setBounds(185,200,150,40);
         withdraw.addActionListener(this);
         add(withdraw);
         
-        back = new JButton("EXit");
+        back = new JButton("Exit");
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
-        back.setBounds(190,250,150,40);
+        back.setBounds(185,250,150,40);
         back.addActionListener(this);
         add(back);
         

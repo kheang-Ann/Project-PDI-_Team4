@@ -82,9 +82,11 @@ public class Transaction extends JFrame implements ActionListener{
             setVisible(false);
             new Withdraw(pin).setVisible(true);
         } else if (ae.getSource() == transfer){
-
+            setVisible(false);
+            new Transfer(pin).setVisible(true);
         } else if(ae.getSource() == Acc_list){
-            
+            setVisible(true);
+            new showlist(pin).setVisible(true);
         } else if(ae.getSource() == changepin){
             setVisible(false);
             new Pinchange(pin).setVisible(true);

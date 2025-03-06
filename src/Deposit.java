@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Date;
-
 import javax.swing.*;
 
 public class Deposit extends JFrame implements ActionListener {
@@ -18,7 +17,7 @@ public class Deposit extends JFrame implements ActionListener {
         ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
         setIconImage(image.getImage());
 
-        setSize(500, 500);
+        setSize(530, 400);
         setLocation(300, 0);
         getContentPane().setBackground(Color.decode("#0BC7D2"));
         
@@ -44,7 +43,7 @@ public class Deposit extends JFrame implements ActionListener {
         deposit.addActionListener(this);
         add(deposit);
         
-        back = new JButton("EXit");
+        back = new JButton("Exit");
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
         back.setBounds(210,250,100,40);
         back.addActionListener(this);
