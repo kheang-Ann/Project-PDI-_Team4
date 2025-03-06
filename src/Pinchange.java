@@ -52,9 +52,9 @@ public class Pinchange extends JFrame implements ActionListener{
         back.addActionListener(this);
         add(back);
 
-        setSize(500,500);
+        setSize(520,500);
         setLocation(300,0);
-        getContentPane().setBackground(Color.decode("#00BD99"));
+        getContentPane().setBackground(Color.decode("#3674B5"));
         //setUndecorated(true);
         setLocationRelativeTo(null);
         setVisible(true);

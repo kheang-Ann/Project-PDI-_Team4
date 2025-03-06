@@ -19,7 +19,7 @@ public class Transfer extends JFrame implements ActionListener {
 
         setSize(520, 400);
         setLocation(300, 0);
-        getContentPane().setBackground(Color.decode("#0BC7D2"));
+        getContentPane().setBackground(Color.decode("#578FCA"));
         
         text = new JLabel("Transfer");
         text.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -28,12 +28,13 @@ public class Transfer extends JFrame implements ActionListener {
         
         Card_no = new JLabel("Card Number: ");
         Card_no.setFont(new Font("Tahoma", Font.BOLD, 15));
-        Card_no.setBounds(80,100,200,40);
+        Card_no.setBounds(40,100,200,40);
         add(Card_no);
         
         card = new JTextField();
         card.setFont(new Font("Tahoma", Font.BOLD, 15));
         card.setBounds(160, 100, 200, 40);
+        add(card);
         
         amount = new JLabel("Amount: ");
         amount.setFont(new Font("Tahoma", Font.BOLD, 15));

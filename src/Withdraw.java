@@ -19,7 +19,7 @@ public class Withdraw extends JFrame implements ActionListener {
 
         setSize(530, 400);
         setLocation(300, 0);
-        getContentPane().setBackground(Color.decode("#0BC7D2"));
+        getContentPane().setBackground(Color.decode("#A1E3F9"));
         
         text = new JLabel("Withdraw");
         text.setFont(new Font("Tahoma", Font.BOLD, 25));
