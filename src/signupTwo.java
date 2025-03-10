@@ -1,14 +1,14 @@
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import java.awt.event.*;
 
 public class signupTwo extends JFrame implements ActionListener{
-    JTextField idCard, pan, Senior;
+    JTextField idCard, ph, Senior;
     JButton Submit, cancel;
     JRadioButton yes, no , yes2, no2;
     JComboBox incomes, educations, job, reli, countrys;
-    JLabel Existing, page2, country, religion, income, education, quailification, Job, PAN, IDcard;
+    JLabel Existing, page2, country, religion, income, education, quailification, Job, phone, IDcard;
     String form;
 
     signupTwo(String form){
@@ -20,6 +20,7 @@ public class signupTwo extends JFrame implements ActionListener{
         setSize(850, 800);
         setLocation(350, 10);
         setTitle("Sign Up");
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         ImageIcon I1 = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\Logo.png");
@@ -93,20 +94,22 @@ public class signupTwo extends JFrame implements ActionListener{
         job.setBounds(200,390,444,25);
         add(job);
         
-        PAN = new JLabel("PAN Number: ");        //PAN number
-        PAN.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PAN.setBounds(50,450,200,40);
-        add(PAN);
-        pan = new JTextField();
-        pan.setBounds(200,460, 444,25);
-        pan.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        add(pan);
-        pan.setColumns(15);
+        phone = new JLabel("Phone Number: ");        //Phone number
+        phone.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        phone.setBounds(50,450,200,40);
+        add(phone);
+
+        ph = new JTextField();
+        ph.setBounds(200,460, 444,25);
+        ph.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        ph.setColumns(15);
+        add(ph);
         
         IDcard = new JLabel("National ID card: ");     //National ID card
         IDcard.setFont(new Font("Tahoma", Font.PLAIN, 15));
         IDcard.setBounds(50,500,200,40);
         add(IDcard);
+
         idCard = new JTextField();
         idCard.setBounds(200,510, 444,25);
         idCard.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -159,6 +162,24 @@ public class signupTwo extends JFrame implements ActionListener{
         Submit.setBounds(570,670,100,40);
         Submit.addActionListener(this);
         add(Submit);
+
+        ph.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
+
+        idCard.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
         
         setVisible(true); 
         }
@@ -183,7 +204,7 @@ public class signupTwo extends JFrame implements ActionListener{
             exist = "No";
         }
 
-        String span = pan.getText();
+        String span = ph.getText();
         String card = idCard.getText();
 
         if(as.getSource() == Submit){
@@ -207,7 +228,7 @@ public class signupTwo extends JFrame implements ActionListener{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            
         }
         else if(as.getSource() == cancel){
             setVisible(false);

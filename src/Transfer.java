@@ -1,13 +1,14 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Date;
+import java.sql.ResultSet;
+import java.util.*;
 import javax.swing.*;
 
 public class Transfer extends JFrame implements ActionListener {
 
     JLabel text, amount, Card_no;
     JTextField money, card;
-    JButton withdraw, back;
+    JButton transfer, back;
     String pin;
     Transfer(String pin){
         this.pin = pin;
@@ -17,9 +18,12 @@ public class Transfer extends JFrame implements ActionListener {
         ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
         setIconImage(image.getImage());
 
+        setTitle("Transfer");
         setSize(520, 400);
         setLocation(300, 0);
-        getContentPane().setBackground(Color.decode("#0BC7D2"));
+        setLocationRelativeTo(null);
+        setResizable(false);
+        getContentPane().setBackground(Color.decode("#578FCA"));
         
         text = new JLabel("Transfer");
         text.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -28,12 +32,22 @@ public class Transfer extends JFrame implements ActionListener {
         
         Card_no = new JLabel("Card Number: ");
         Card_no.setFont(new Font("Tahoma", Font.BOLD, 15));
-        Card_no.setBounds(80,100,200,40);
+        Card_no.setBounds(40,100,200,40);
         add(Card_no);
         
         card = new JTextField();
         card.setFont(new Font("Tahoma", Font.BOLD, 15));
         card.setBounds(160, 100, 200, 40);
+        add(card);
+
+        card.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
         
         amount = new JLabel("Amount: ");
         amount.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -43,26 +57,124 @@ public class Transfer extends JFrame implements ActionListener {
         money = new JTextField();
         money.setFont(new Font("Tahoma", Font.BOLD, 15));
         money.setBounds(160,150,200,40);
-        getContentPane().add(money);
         money.setColumns(15);
+        getContentPane().add(money);
+
+        money.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
         
-        withdraw = new JButton("Transfer");
-        withdraw.setFont(new Font("Tahoma", Font.BOLD, 15));
-        withdraw.setBounds(185,220,150,40);
-        withdraw.addActionListener(this);
-        add(withdraw);
+        transfer = new JButton("Transfer");
+        transfer.setFont(new Font("Tahoma", Font.BOLD, 15));
+        transfer.setBounds(185,220,150,40);
+        transfer.addActionListener(this);
+        transfer.setFocusable(false);
+        add(transfer);
         
         back = new JButton("Exit");
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
         back.setBounds(185,270,150,40);
         back.addActionListener(this);
+        back.setFocusable(false);
         add(back);
         
         setVisible(true);
     }
+
+    class verify extends JFrame implements ActionListener{
+        JButton pins, Back;
+        JTextField fill_pin;
+        JLabel pinn, text;
+        String code;
+
+        public verify(String code) {
+            this.code = code;
+
+            setLayout(null);
+
+            text = new JLabel("Verify the pin first before transfer money");
+            text.setFont(new Font("Tahoma", Font.BOLD, 15));
+            text.setBounds(30,30,400,20);
+            add(text);
+
+            pinn = new JLabel("Pin: ");
+            pinn.setFont(new Font("Tahoma", Font.BOLD, 15));
+            pinn.setBounds(50,100,40,40);
+            add(pinn);
+
+            fill_pin = new JTextField();
+            fill_pin.setBounds(100,105,200,30);
+            add(fill_pin);
+
+            fill_pin.addKeyListener(new KeyAdapter() {
+                public void keyTyped(KeyEvent e){
+                    char c = e.getKeyChar();
+                    if(!Character.isDigit(c)){
+                        e.consume();
+                    }
+                }
+            });
+
+
+            pins = new JButton("Verify");
+            pins.setBounds(150,150, 100,40);
+            pins.setFocusable(false);
+            pins.addActionListener(this);
+            add(pins);
+
+            Back = new JButton("Back");
+            Back.setBounds(150,200,100,40);
+            Back.setFocusable(false);
+            Back.addActionListener(this);
+            add(Back);
+
+            setTitle("Verify the pin");
+            setSize(400,300);
+            setLocation(300, 0);
+            setResizable(false);
+            setLocationRelativeTo(null);
+            setVisible(true);
+
+        }
+        public void actionPerformed(ActionEvent ea){
+            if (ea.getSource() == Back){
+                setVisible(false);
+                new Transfer(code).setVisible(true);
+            } else if(ea.getSource() == pins){
+                Bank b = new Bank();
+                String pin = fill_pin.getText();
+
+                //String qucry = "select * from loign where cardnumber = '"+cardnumber+"' and pin = '"+pin+"'";
+
+                String query = "select * from verify where pin = '"+pin+"'";
+                System.out.println("Executing query: " + query);
+                try {
+                    ResultSet set = b.s.executeQuery(query);
+                    if(set.next()){
+                        System.out.println("Pin verify successfully.");
+                        setVisible(false);
+                        new Transaction(code).setVisible(true);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Incorrect pin number!");
+                    }
+                } catch (Exception ex) {
+                    System.out.println( "Exception: " +ex);
+                }
+            }
+        }
+        
+    }
     
     public void actionPerformed(ActionEvent ae){
-        if(ae.getSource() == withdraw){
+        if(ae.getSource() == transfer){
+            setVisible(false);
+            new verify(pin).setVisible(true);
             String number = money.getText();
             Date date = new Date();
             if(number.equals("")){

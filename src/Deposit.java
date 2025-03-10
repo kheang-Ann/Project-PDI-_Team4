@@ -36,6 +36,15 @@ public class Deposit extends JFrame implements ActionListener {
         money.setBounds(160,100,200,40);
         getContentPane().add(money);
         money.setColumns(15);
+
+        money.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
         
         deposit = new JButton("Deposit");
         deposit.setFont(new Font("Tahoma", Font.BOLD, 15));

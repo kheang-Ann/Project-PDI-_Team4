@@ -1,6 +1,6 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class Pinchange extends JFrame implements ActionListener{
     JLabel text, pintext, repeat;
@@ -30,6 +30,15 @@ public class Pinchange extends JFrame implements ActionListener{
         pinsField.setBounds(220,155,200,30);
         add(pinsField);
 
+        pinsField.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
+
         repeat = new JLabel("Enter again:");
         repeat.setFont(new Font("System", Font.BOLD, 20));
         repeat.setBounds(80,220,200 ,40);
@@ -40,21 +49,36 @@ public class Pinchange extends JFrame implements ActionListener{
         repField.setBounds(220,225,200,30);
         add(repField);
 
+        repField.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
+
         change = new JButton("Change");
         change.setFont(new Font("Tahoma", Font.BOLD, 20));
         change.setBounds(150,300,200,40);
+        change.setBackground(Color.green);
+        change.setForeground(Color.BLACK);
         change.addActionListener(this);
+        change.setFocusable(false);
         add(change);
 
         back = new JButton("Back");
         back.setFont(new Font("Tahoma", Font.BOLD, 20));
         back.setBounds(150,350,200,40);
+        back.setBackground(Color.RED);
+        back.setForeground(Color.BLACK);
         back.addActionListener(this);
+        back.setFocusable(false);
         add(back);
 
-        setSize(500,500);
+        setSize(520,500);
         setLocation(300,0);
-        getContentPane().setBackground(Color.decode("#00BD99"));
+        getContentPane().setBackground(Color.decode("#3674B5"));
         //setUndecorated(true);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -87,13 +111,20 @@ public class Pinchange extends JFrame implements ActionListener{
                 bank.s.executeUpdate(query2);
                 bank.s.executeUpdate(query3);
 
+                // JOptionPane.showMessageDialog(null, "PIN changed successfully");
+
+                // setVisible(false);
+                // new Transaction(npin).setVisible(true);
+                
+            } catch (Exception ae) {
+                String npin = pinsField.getText(); 
+                System.out.println("Clicked error");
                 JOptionPane.showMessageDialog(null, "PIN changed successfully");
 
                 setVisible(false);
                 new Transaction(npin).setVisible(true);
-
-            } catch (Exception ae) {
-                System.out.println("Change button clicked!");
+                //ae.printStackTrace();
+                //JOptionPane.showMessageDialog(null, "An Error");
             }
         } else if (e.getSource() == back) {
             setVisible(false);

@@ -19,7 +19,8 @@ public class Withdraw extends JFrame implements ActionListener {
 
         setSize(530, 400);
         setLocation(300, 0);
-        getContentPane().setBackground(Color.decode("#0BC7D2"));
+        setResizable(false);
+        getContentPane().setBackground(Color.decode("#A1E3F9"));
         
         text = new JLabel("Withdraw");
         text.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -36,6 +37,15 @@ public class Withdraw extends JFrame implements ActionListener {
         money.setBounds(160,100,200,40);
         getContentPane().add(money);
         money.setColumns(15);
+
+        money.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
         
         withdraw = new JButton("Withdraw");
         withdraw.setFont(new Font("Tahoma", Font.BOLD, 15));

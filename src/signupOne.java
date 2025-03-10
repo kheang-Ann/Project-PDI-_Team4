@@ -20,10 +20,11 @@ public class signupOne extends JFrame implements ActionListener{
 
         setSize(850, 800);
         setLocation(350, 10);
+        setResizable(false);
         setTitle("Sign Up");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        ImageIcon I1 = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\Logo.png");
+        ImageIcon I1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\src\\image.png");
         Image I2 = I1.getImage().getScaledInstance(100, 100, DO_NOTHING_ON_CLOSE);
         ImageIcon I3 = new ImageIcon(I2);
         JLabel label = new JLabel(I3);
@@ -153,25 +154,25 @@ public class signupOne extends JFrame implements ActionListener{
         
         //Fill Address
         addressField = new JTextField();
-        addressField.setBounds(200,460, 444,25);
+        addressField.setBounds(200,610, 444,25);
         addressField.setFont(new Font("Tahoma", Font.PLAIN, 15));
         getContentPane().add(addressField);
         addressField.setColumns(15);
         
         cityField = new JTextField();
-        cityField.setBounds(200,510, 444,25);
+        cityField.setBounds(200,460, 444,25);
         cityField.setFont(new Font("Tahoma", Font.PLAIN, 15));
         getContentPane().add(cityField);
         cityField.setColumns(15);
         
         pinField = new JTextField();
-        pinField.setBounds(200,560, 444,25);
+        pinField.setBounds(200,510, 444,25);
         pinField.setFont(new Font("Tahoma", Font.PLAIN, 15));
         getContentPane().add(pinField);
         pinField.setColumns(15);
         
         Khan = new JTextField();
-        Khan.setBounds(200,610, 444,25);
+        Khan.setBounds(200,560, 444,25);
         Khan.setFont(new Font("Tahoma", Font.PLAIN, 15));
         getContentPane().add(Khan);
         Khan.setColumns(15);
@@ -181,7 +182,60 @@ public class signupOne extends JFrame implements ActionListener{
         next.setBounds(570,670,70,40);
         next.addActionListener(this);
         add(next);
-        
+
+        textField_username.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isLetter(c)){
+                    e.consume();
+                }
+            }
+        });
+
+        parenTextField.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isLetter(c)){
+                    e.consume();
+                }
+            }
+        });        
+
+        addressField.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isLetter(c)){
+                    e.consume();
+                }
+            }
+        });
+
+        Khan.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isLetter(c)){
+                    e.consume();
+                }
+            }
+        });
+
+        addressField.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isLetter(c)){
+                    e.consume();
+                }
+            }
+        });
+
+        cityField.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!Character.isLetter(c)){
+                    e.consume();
+                }
+            }
+        });
         
         setVisible(true); 
     }
