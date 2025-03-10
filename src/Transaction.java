@@ -13,7 +13,7 @@ public class Transaction extends JFrame implements ActionListener{
 
         setLayout(null);
 
-        ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
+        ImageIcon image = new ImageIcon("D:\\All of my lessons\\Project-PDI-Team4\\Project-PDI-_Team4\\src\\ITC.png");
         setIconImage(image.getImage());
 
         ImageIcon l1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\src\\image.png");
