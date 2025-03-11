@@ -142,6 +142,8 @@ public class Transfer extends JFrame implements ActionListener {
 
         }
         public void actionPerformed(ActionEvent ea){
+
+            
             if (ea.getSource() == Back){
                 setVisible(false);
                 new Transfer(code).setVisible(true);
@@ -149,9 +151,12 @@ public class Transfer extends JFrame implements ActionListener {
                 Bank b = new Bank();
                 String pin = fill_pin.getText();
 
-                //String qucry = "select * from loign where cardnumber = '"+cardnumber+"' and pin = '"+pin+"'";
+                if(pin.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Please enter the pin.");
+                    return;
+                }
 
-                String query = "select * from verify where pin = '"+pin+"'";
+                String query = "select * from verify where pin = '" + pin + "'";
                 System.out.println("Executing query: " + query);
                 try {
                     ResultSet set = b.s.executeQuery(query);
@@ -165,6 +170,7 @@ public class Transfer extends JFrame implements ActionListener {
                     }
                 } catch (Exception ex) {
                     System.out.println( "Exception: " +ex);
+                    JOptionPane.showMessageDialog(null, "An error occurred while verifying the pin.");
                 }
             }
         }
@@ -175,6 +181,8 @@ public class Transfer extends JFrame implements ActionListener {
         if(ae.getSource() == transfer){
             setVisible(false);
             new verify(pin).setVisible(true);
+
+
             String number = money.getText();
             Date date = new Date();
             if(number.equals("")){
