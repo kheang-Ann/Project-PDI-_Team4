@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.*;
 
@@ -39,6 +40,9 @@ public class History extends JFrame implements ActionListener {
         // Debugging: Print the pin and the size of the history list
         System.out.println("PIN: " + pin);
         System.out.println("Number of transactions: " + history.size());
+
+        // Reverse the order of the transactions
+        Collections.reverse(history);
 
         for (String transaction : history) {
             historyArea.append(transaction + "\n");
