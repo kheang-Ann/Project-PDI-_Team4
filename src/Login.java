@@ -137,7 +137,7 @@ public class Login extends JFrame implements ActionListener {
             new signupOne().setVisible(true);
         } else if (e.getSource() == AboutUs) {
             setVisible(false);
-            new Infor_Developer().setVisible(true); // Corrected class name
+            new Info_Developer().setVisible(true); // Corrected class name
         }
     }
 

@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.net.URI;
 import javax.swing.*;
 
-public class Info_Developer implements ActionListener {
+public class Info_Developer extends JFrame implements ActionListener {
     private JButton back;
     private JFrame frame;
 
