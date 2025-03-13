@@ -73,10 +73,8 @@ DELIMITER ;
 -- 5️⃣ Check Created Tables
 SHOW TABLES;
 
--- 6️⃣ Insert Sample Data Using Stored Procedure
-CALL insert_pin('123456', 'testForm', '987654321');
 drop table signupOne ;
--- 7️⃣ Verify Data
+-- 6️⃣ Verify Data
 SELECT * FROM verify;
 SELECT * FROM login;
 SELECT * FROM bank;
