@@ -9,7 +9,6 @@ public class History extends JFrame implements ActionListener {
     String pin;
     JButton back;
 
-    
     public History(String pin) {
         this.pin = pin;
 

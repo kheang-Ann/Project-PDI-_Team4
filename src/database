@@ -1,0 +1,82 @@
+-- 1️⃣ Create the Database
+CREATE DATABASE IF NOT EXISTS bankmanagementsystem;
+USE bankmanagementsystem;
+
+-- 2️⃣ Drop Existing Tables if Needed
+DROP TABLE IF EXISTS login;
+DROP TABLE IF EXISTS bank;
+DROP TABLE IF EXISTS verify;
+DROP TABLE IF EXISTS signupTwo;
+DROP TABLE IF EXISTS signupOne;
+
+-- 3️⃣ Create Tables
+CREATE TABLE signupOne (
+    form VARCHAR(20), 
+    name VARCHAR(20), 
+    father_name VARCHAR(20), 
+    date VARCHAR(20), 
+    gender VARCHAR(20), 
+    email VARCHAR(30), 
+    relationship VARCHAR(20), 
+    pin VARCHAR(10),  -- Changed from VARCHAR(25) to match verify
+    KhanOrDistrict VARCHAR(20), 
+    address VARCHAR(40), 
+    city VARCHAR(25)
+);
+
+CREATE TABLE signupTwo (
+    form VARCHAR(20), 
+    country VARCHAR(40), 
+    Sreligion VARCHAR(40), 
+    Income VARCHAR(40), 
+    Education VARCHAR(40), 
+    jobss VARCHAR(40), 
+    Pan VARCHAR(40), 
+    ID VARCHAR(40), 
+    SeniorCitizen VARCHAR(40), 
+    ExistingAccount VARCHAR(40)
+);
+
+CREATE TABLE verify (
+    pin VARCHAR(10) PRIMARY KEY -- Ensure pin is unique
+);
+
+CREATE TABLE login (
+    form VARCHAR(20), 
+    cardnumber VARCHAR(25),  
+    pin VARCHAR(10),
+    FOREIGN KEY (pin) REFERENCES verify(pin) ON DELETE CASCADE -- Ensures pin in login exists in verify
+);
+
+CREATE TABLE bank (
+    pin VARCHAR(10), 
+    date VARCHAR(50), 
+    type VARCHAR(20), 
+    amount VARCHAR(20),
+    FOREIGN KEY (pin) REFERENCES verify(pin) ON DELETE CASCADE -- Ensures pin exists in verify
+);
+
+-- 4️⃣ Stored Procedure to Insert pin in Both verify and login
+DELIMITER //
+CREATE PROCEDURE insert_pin (
+    IN pin_value VARCHAR(10), 
+    IN form_value VARCHAR(20), 
+    IN cardnumber_value VARCHAR(25)
+)
+BEGIN
+    INSERT IGNORE INTO verify (pin) VALUES (pin_value); -- Ensures pin is added to verify
+    INSERT INTO login (form, cardnumber, pin) VALUES (form_value, cardnumber_value, pin_value);
+END;
+//
+DELIMITER ;
+
+-- 5️⃣ Check Created Tables
+SHOW TABLES;
+
+drop table signupOne ;
+-- 6️⃣ Verify Data
+SELECT * FROM verify;
+SELECT * FROM login;
+SELECT * FROM bank;
+SELECT * FROM signupOne;
+SELECT * FROM signupTwo;
