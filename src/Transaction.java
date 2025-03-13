@@ -13,10 +13,10 @@ public class Transaction extends JFrame implements ActionListener{
 
         setLayout(null);
 
-        ImageIcon image = new ImageIcon("D:\\All of my lessons\\Project-PDI-Team4\\Project-PDI-_Team4\\src\\ITC.png");
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\ITC.png");
         setIconImage(image.getImage());
 
-        ImageIcon l1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\src\\image.png");
+        ImageIcon l1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\image.png");
         Image l2 = l1.getImage().getScaledInstance(180, 180, Image.SCALE_DEFAULT);
         ImageIcon l3 = new ImageIcon(l2);
         JLabel label = new JLabel(l3);
