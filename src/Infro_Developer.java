@@ -1,68 +1,78 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URI;
-
 import javax.swing.*;
 
-public class Infro_Developer extends JFrame {
-    JButton back;
+public class Infro_Developer implements ActionListener {
+    private JButton back;
+    private JFrame frame;
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("About Us");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(1024, 700);
-            frame.setResizable(false);
-            frame.setLocationRelativeTo(null);
+    public Infro_Developer() {
+        frame = new JFrame("About Us");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1024, 700);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
 
-            ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
-            frame.setIconImage(image.getImage());
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\ITC.png");
+        frame.setIconImage(image.getImage());
 
-            // Background Panel
-            JLabel background = new JLabel(new ImageIcon(new ImageIcon(
-                "D:\\All of my lessons\\Project-PDI-Team4\\Project-PDI-_Team4\\src\\background.jpg")
-                .getImage().getScaledInstance(1024, 700, Image.SCALE_SMOOTH)));
+        // Background Panel
+        JLabel background = new JLabel(new ImageIcon(new ImageIcon(
+            "E:\\Java Y2\\Project(PDI)\\backgrond.jpg")
+            .getImage().getScaledInstance(1024, 700, Image.SCALE_SMOOTH)));
 
-            background.setLayout(new GridBagLayout()); // Center everything
-            // Title
-            JLabel titleLabel = new JLabel("Developer Of Bank Account System", SwingConstants.CENTER);
-            titleLabel.setForeground(Color.WHITE);
-            titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        background.setLayout(new GridBagLayout()); // Center everything
+        // Title
+        JLabel titleLabel = new JLabel("Developer Of Bank Account System", SwingConstants.CENTER);
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
 
-            // Team Members Panel
-            JPanel teamPanel = createTeamMembers();
-            teamPanel.setOpaque(false);
+        // Team Members Panel
+        JPanel teamPanel = createTeamMembers();
+        teamPanel.setOpaque(false);
 
-            // Content Panel (Centering everything)
-            JPanel contentPanel = new JPanel();
-            contentPanel.setLayout(new BorderLayout());
-            contentPanel.setOpaque(false);
-            contentPanel.add(titleLabel, BorderLayout.NORTH);
-            contentPanel.add(teamPanel, BorderLayout.CENTER);
+        // Content Panel (Centering everything)
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BorderLayout());
+        contentPanel.setOpaque(false);
+        contentPanel.add(titleLabel, BorderLayout.NORTH);
+        contentPanel.add(teamPanel, BorderLayout.CENTER);
 
-            // Back Button Panel
-            JPanel backPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            JButton back = new JButton("Back");
-            back.setPreferredSize(new Dimension(100, 40)); // Set the preferred size of the button
-            back.setFont(new Font("Tahoma", Font.BOLD, 15));
-            back.setFocusable(false);
-            backPanel.add(back);
-            contentPanel.add(backPanel, BorderLayout.SOUTH); // Add back button panel to content panel
+        // Back Button Panel
+        JPanel backPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        backPanel.setOpaque(false); // Make panel transparent
+                
+        back = new JButton("Back");
+        back.setPreferredSize(new Dimension(100, 40)); // Set the preferred size of the button
+        back.setFont(new Font("Tahoma", Font.BOLD, 15));
+        back.setBounds(300,600,100,40);
+        back.addActionListener(this);
+        back.setFocusable(false);
+        back.setForeground(Color.BLACK); // Change text color for visibility
+        
+                
+        backPanel.add(back);
+        contentPanel.add(backPanel, BorderLayout.SOUTH); // Add back button panel to content panel
+                
+        // Center content in background
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        background.add(contentPanel, gbc);
 
-            // Center content in background
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.CENTER;
-            background.add(contentPanel, gbc);
+        frame.setContentPane(background);
+        frame.setVisible(true);
+    }
 
-            frame.setContentPane(background);
-            frame.setVisible(true);
-        });
-        // public void actionPerformed(ActionEvent e){
-        //     if(e.getSource() == back){
-
-        //     }
-        // }
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == back) {
+            frame.setVisible(false);
+            new Login().setVisible(true);
+        }
     }
 
     private static JPanel createTeamMembers() {
@@ -70,9 +80,9 @@ public class Infro_Developer extends JFrame {
         teamPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 20)); // Add spacing
         teamPanel.setOpaque(false);
 
-        teamPanel.add(createTeamMember("Backend", "Kheang Ann", "D:\\All of my lessons\\Project-PDI-Team4\\Project-PDI-_Team4\\src\\ann.jpg", "https://kheangann.netlify.app/"));
-        teamPanel.add(createTeamMember("Frontend", "Tat Chansereyvong", "D:\\All of my lessons\\Project-PDI-Team4\\Project-PDI-_Team4\\src\\Vong.JPG", "https://practice-uxui.netlify.app/"));
-        teamPanel.add(createTeamMember("Database and Security", "Try Khemchhun", "D:\\All of my lessons\\Project-PDI-Team4\\Project-PDI-_Team4\\src\\chhun.jpg", "https://practice-uxui.netlify.app/"));
+        teamPanel.add(createTeamMember("Backend", "Kheang Ann", "E:\\Java Y2\\Project(PDI)\\ann.JPG", "https://kheangann.netlify.app/"));
+        teamPanel.add(createTeamMember("Frontend", "Tat Chansereyvong", "E:\\Java Y2\\Project(PDI)\\Vong.jpg", "https://practice-uxui.netlify.app/"));
+        teamPanel.add(createTeamMember("Database and Security", "Try Khemchhun", "E:\\Java Y2\\Project(PDI)\\chhun.jpg", "https://trykhemchhun.netlify.app/"));
 
         return teamPanel;
     }
@@ -130,5 +140,9 @@ public class Infro_Developer extends JFrame {
         memberPanel.add(portfolioButton);
 
         return memberPanel;
+    }
+
+    public static void main(String[] args) {
+        new Infro_Developer();
     }
 }
