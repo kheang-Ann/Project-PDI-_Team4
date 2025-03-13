@@ -3,8 +3,9 @@ import java.net.URI;
 
 import javax.swing.*;
 
-public class Infro_Developer extends JFrame{
-    Button back;
+public class Infro_Developer extends JFrame {
+    JButton back;
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("About Us");
@@ -38,10 +39,14 @@ public class Infro_Developer extends JFrame{
             contentPanel.add(titleLabel, BorderLayout.NORTH);
             contentPanel.add(teamPanel, BorderLayout.CENTER);
 
-            // Button back = new Button("Back");
-            // back.setBounds(500,600,100,40);
-            // back.setFont(new Font("Tahoma", Font.BOLD, 15));
-            // add(back);
+            // Back Button Panel
+            JPanel backPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            JButton back = new JButton("Back");
+            back.setPreferredSize(new Dimension(100, 40)); // Set the preferred size of the button
+            back.setFont(new Font("Tahoma", Font.BOLD, 15));
+            back.setFocusable(false);
+            backPanel.add(back);
+            contentPanel.add(backPanel, BorderLayout.SOUTH); // Add back button panel to content panel
 
             // Center content in background
             GridBagConstraints gbc = new GridBagConstraints();
@@ -84,8 +89,6 @@ public class Infro_Developer extends JFrame{
         Image scaledImage = originalImage.getScaledInstance(150, 200, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel profileLabel = new JLabel(scaledIcon);
-
-        
 
         // Role Label
         JLabel roleLabel = new JLabel(role, SwingConstants.CENTER);
