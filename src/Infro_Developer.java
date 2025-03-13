@@ -85,6 +85,8 @@ public class Infro_Developer extends JFrame{
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel profileLabel = new JLabel(scaledIcon);
 
+        
+
         // Role Label
         JLabel roleLabel = new JLabel(role, SwingConstants.CENTER);
         roleLabel.setForeground(Color.WHITE);
