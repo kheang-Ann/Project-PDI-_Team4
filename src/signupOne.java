@@ -99,14 +99,17 @@ public class signupOne extends JFrame implements ActionListener{
         
         single = new JRadioButton("Single");
         single.setBounds(200,400,200,40);
+        single.setFocusable(false);
         add(single);
         
         married = new JRadioButton("Married");
         married.setBounds(400,400,200,40);
+        married.setFocusable(false);
         add(married);
         
         other1 = new JRadioButton("Other");
         other1.setBounds(600,400,200,40);
+        other1.setFocusable(false);
         add(other1);
         
         ButtonGroup relationshiGroup = new ButtonGroup();
@@ -119,7 +122,7 @@ public class signupOne extends JFrame implements ActionListener{
         City.setBounds(50,450,200,40);
         add(City);
         
-        JLabel Pin = new JLabel("Pin Code: ");
+        JLabel Pin = new JLabel("PostCode: ");
         Pin.setFont(new Font("Tahoma", Font.PLAIN, 15));
         Pin.setBounds(50,500,200,40);
         add(Pin);
@@ -173,6 +176,15 @@ public class signupOne extends JFrame implements ActionListener{
         pinField.setFont(new Font("Tahoma", Font.PLAIN, 15));
         getContentPane().add(pinField);
         pinField.setColumns(15);
+
+        pinField.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                }
+            }
+        });
         
         Khan = new JTextField();
         Khan.setBounds(200,560, 444,25);

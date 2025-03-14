@@ -23,6 +23,14 @@ public class Transaction extends JFrame implements ActionListener{
         label.setBounds(30, 0, 180, 180);
         add(label);
 
+        //Icon Deposit
+        ImageIcon D = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Deposit.png");
+        Image D1 = D.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        ImageIcon D2 = new ImageIcon(D1);
+        // JLabel De = new JLabel(D2);
+        // De.setBounds(260,302, 30, 30);
+        // add(De);
+
         setSize(800, 800);
         setLocation(300,0);
         getContentPane().setBackground(Color.decode("#00BD99"));
@@ -33,7 +41,7 @@ public class Transaction extends JFrame implements ActionListener{
         Bank_acc.setBounds(265, 200,300,40);
         add(Bank_acc);
 
-        deposit = new JButton("Deposit");
+        deposit = new JButton("Deposit", D2);
         deposit.setFont(new Font("Tahoma", Font.BOLD, 20));
         deposit.setBounds(250,300,300,40);
         deposit.addActionListener(this);
