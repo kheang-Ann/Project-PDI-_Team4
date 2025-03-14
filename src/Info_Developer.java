@@ -6,18 +6,17 @@ import javax.swing.*;
 
 public class Info_Developer extends JFrame implements ActionListener {
     private JButton back;
-    private JFrame frame;
 
     public Info_Developer() {
-        frame = new JFrame("About Us");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1024, 700);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(null);
+        setTitle("About Us");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1024, 700);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setLayout(null);
 
         ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\ITC.png");
-        frame.setIconImage(image.getImage());
+        setIconImage(image.getImage());
 
         // Background Panel
         JLabel background = new JLabel(new ImageIcon(new ImageIcon(
@@ -52,7 +51,6 @@ public class Info_Developer extends JFrame implements ActionListener {
         back.addActionListener(this);
         back.setFocusable(false);
         back.setForeground(Color.BLACK); // Change text color for visibility
-        
                 
         backPanel.add(back);
         contentPanel.add(backPanel, BorderLayout.SOUTH); // Add back button panel to content panel
@@ -64,13 +62,13 @@ public class Info_Developer extends JFrame implements ActionListener {
         gbc.anchor = GridBagConstraints.CENTER;
         background.add(contentPanel, gbc);
 
-        frame.setContentPane(background);
-        frame.setVisible(true);
+        setContentPane(background);
+        setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == back) {
-            frame.setVisible(false);
+            setVisible(false);
             new Login().setVisible(true);
         }
     }

@@ -21,6 +21,16 @@ public class signupTwo extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
+        setIconImage(image.getImage());
+
+        ImageIcon I1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\image.png");
+        Image I2 = I1.getImage().getScaledInstance(100, 100, DO_NOTHING_ON_CLOSE);
+        ImageIcon I3 = new ImageIcon(I2);
+        JLabel label = new JLabel(I3);
+        label.setBounds(48, 10, 100, 100);
+        add(label);
+
         JLabel page2 = new JLabel("Page 2: Additional Details");
         page2.setFont(new Font("Tahoma", Font.BOLD, 20));
         page2.setBounds(300, 80, 400, 40);
@@ -158,7 +168,7 @@ public class signupTwo extends JFrame implements ActionListener {
             String pinNumber = "" + (100 + new Random().nextInt(900)); // Ensures 3-digit number
 
             try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankmanagementsystem",
-                    "root", "khemchhun250306")) {
+                    "root", "!@ann2024@!")) {
 
                 String query1 = "INSERT INTO signupTwo (form, country, Sreligion, Income, Education, jobss, Pan, ID, SeniorCitizen, ExistingAccount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement ps1 = conn.prepareStatement(query1);
