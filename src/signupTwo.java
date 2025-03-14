@@ -97,6 +97,15 @@ public class signupTwo extends JFrame implements ActionListener {
         ph.setFont(new Font("Tahoma", Font.PLAIN, 15));
         add(ph);
 
+        ph.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                }
+            }
+        });
+
         JLabel IDcardLabel = new JLabel("National ID Card: ");
         IDcardLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         IDcardLabel.setBounds(50, 500, 200, 40);
@@ -106,6 +115,15 @@ public class signupTwo extends JFrame implements ActionListener {
         idCard.setBounds(200, 510, 444, 25);
         idCard.setFont(new Font("Tahoma", Font.PLAIN, 15));
         add(idCard);
+
+        idCard.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                }
+            }
+        });
 
         JLabel seniorLabel = new JLabel("Senior Citizen (60+): ");
         seniorLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
