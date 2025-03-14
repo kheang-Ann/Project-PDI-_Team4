@@ -164,6 +164,7 @@ public class Transfer extends JFrame implements ActionListener {
                 new Transfer(code).setVisible(true);
             } else if (ea.getSource() == pins) {
                 Bank b = new Bank();
+                @SuppressWarnings("deprecation")
                 String pin = fill_pin.getText();
 
                 if (pin.isEmpty()) {

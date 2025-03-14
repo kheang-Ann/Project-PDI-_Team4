@@ -10,8 +10,6 @@ public class Login extends JFrame implements ActionListener {
     JPasswordField pintextField;
     JLabel text, loginScreen, Card_num, password, background;
 
-    
-
     Login() {
         setLayout(null);
 
