@@ -16,7 +16,7 @@ public class Login extends JFrame implements ActionListener {
         setLayout(null);
 
         // Background Image
-        ImageIcon backgroundIcon = new ImageIcon("D:\\All of my lessons\\Project-PDI-Team4\\Project-PDI-_Team4\\src\\Background1.jpg");
+        ImageIcon backgroundIcon = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Background1.jpg");
         Image backgroundImage = backgroundIcon.getImage().getScaledInstance(780, 480, Image.SCALE_SMOOTH);
         backgroundIcon = new ImageIcon(backgroundImage);
         JLabel backgroundLabel = new JLabel(backgroundIcon);
