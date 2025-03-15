@@ -1,15 +1,17 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.text.*;
 
 public class Transfer extends JFrame implements ActionListener {
 
     JLabel text, amount, Card_no;
     JTextField money, card;
     JButton transfer, back;
-    String pin;    
+    String pin;
 
     Transfer(String pin) {
         this.pin = pin;
@@ -61,10 +63,29 @@ public class Transfer extends JFrame implements ActionListener {
         money.setColumns(15);
         getContentPane().add(money);
 
+        // Set a limit on the input length
+        ((AbstractDocument) money.getDocument()).setDocumentFilter(new DocumentFilter() {
+            private static final int LIMIT = 10; // Increased to allow decimal values
+
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if ((fb.getDocument().getLength() + string.length()) <= LIMIT) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if ((fb.getDocument().getLength() + text.length() - length) <= LIMIT) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
+
         money.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!Character.isDigit(c)) {
+                if (!Character.isDigit(c) && c != '.') { // Allow digits and decimal point
                     e.consume();
                 }
             }
@@ -173,18 +194,15 @@ public class Transfer extends JFrame implements ActionListener {
                 }
 
                 String query = "select * from verify where pin = '" + pin + "'";
-                System.out.println("Executing query: " + query);
                 try {
                     ResultSet set = b.s.executeQuery(query);
                     if (set.next()) {
-                        System.out.println("Pin verified successfully.");
                         setVisible(false);
                         transferMoney();
                     } else {
                         JOptionPane.showMessageDialog(null, "Incorrect pin number!");
                     }
                 } catch (Exception ex) {
-                    System.out.println("Exception: " + ex);
                     JOptionPane.showMessageDialog(null, "An error occurred while verifying the pin.");
                 }
             }
@@ -192,12 +210,16 @@ public class Transfer extends JFrame implements ActionListener {
 
         private void transferMoney() {
             try {
+                double amountValue = Double.parseDouble(amount);
+                DecimalFormat df = new DecimalFormat("#,##0."); // Ensures two decimal places
+                String formattedAmount = df.format(amountValue);
+
                 Bank bank = new Bank();
                 Date date = new Date();
-                String query = "insert into bank value('" + code + "', '" + date + "', 'Transfered' , '" + amount
-                        + "')";
+                String query = "insert into bank value('" + code + "', '" + date + "', 'Transferred' , '" + formattedAmount + "')";
                 bank.s.executeUpdate(query);
-                JOptionPane.showMessageDialog(null, "USD " + amount + " transferred successfully");
+
+                JOptionPane.showMessageDialog(null, "USD " + formattedAmount + " transferred successfully");
                 new Transaction(code).setVisible(true);
             } catch (Exception e) {
                 System.out.println(e);
