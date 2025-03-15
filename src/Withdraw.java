@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Date;
 import javax.swing.*;
+import javax.swing.text.*;
 
 public class Withdraw extends JFrame implements ActionListener {
 
@@ -37,6 +38,25 @@ public class Withdraw extends JFrame implements ActionListener {
         money.setBounds(160,100,200,40);
         getContentPane().add(money);
         money.setColumns(15);
+
+        // Set a limit on the input length
+        ((AbstractDocument) money.getDocument()).setDocumentFilter(new DocumentFilter() {
+            private static final int LIMIT = 10; // Set your limit here
+
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if ((fb.getDocument().getLength() + string.length()) <= LIMIT) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if ((fb.getDocument().getLength() + text.length() - length) <= LIMIT) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
 
         money.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
