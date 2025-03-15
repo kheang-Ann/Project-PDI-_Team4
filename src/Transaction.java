@@ -33,6 +33,7 @@ public class Transaction extends JFrame implements ActionListener{
 
         setSize(800, 800);
         setLocation(300,0);
+        setLocationRelativeTo(null);
         getContentPane().setBackground(Color.decode("#00BD99"));
         //setUndecorated(true);
         

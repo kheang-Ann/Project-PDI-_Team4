@@ -22,6 +22,7 @@ public class Deposit extends JFrame implements ActionListener {
 
         setSize(530, 400);
         setLocation(300, 0);
+        setLocationRelativeTo(null);
         getContentPane().setBackground(Color.decode("#0BC7D2"));
 
         text = new JLabel("Deposit");
@@ -71,12 +72,14 @@ public class Deposit extends JFrame implements ActionListener {
         deposit = new JButton("Deposit");
         deposit.setFont(new Font("Tahoma", Font.BOLD, 15));
         deposit.setBounds(210, 200, 100, 40);
+        deposit.setFocusable(false);
         deposit.addActionListener(this);
         add(deposit);
 
         back = new JButton("Exit");
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
         back.setBounds(210, 250, 100, 40);
+        back.setFocusable(false);
         back.addActionListener(this);
         add(back);
 

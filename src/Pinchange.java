@@ -63,6 +63,7 @@ public class Pinchange extends JFrame implements ActionListener{
         change.setBounds(150,300,200,40);
         change.setBackground(Color.green);
         change.setForeground(Color.BLACK);
+        change.setFocusable(false);
         change.addActionListener(this);
         change.setFocusable(false);
         add(change);
@@ -72,6 +73,7 @@ public class Pinchange extends JFrame implements ActionListener{
         back.setBounds(150,350,200,40);
         back.setBackground(Color.RED);
         back.setForeground(Color.BLACK);
+        back.setFocusable(false);
         back.addActionListener(this);
         back.setFocusable(false);
         add(back);

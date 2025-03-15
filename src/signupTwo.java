@@ -17,6 +17,7 @@ public class signupTwo extends JFrame implements ActionListener {
 
         setSize(850, 800);
         setLocation(350, 10);
+        setLocationRelativeTo(null);
         setTitle("Sign Up");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -137,7 +138,9 @@ public class signupTwo extends JFrame implements ActionListener {
         seniorGroup.add(no);
 
         yes.setBounds(250, 550, 100, 40);
+        yes.setFocusable(false);
         no.setBounds(350, 550, 100, 40);
+        no.setFocusable(false);
         add(yes);
         add(no);
 
@@ -153,17 +156,21 @@ public class signupTwo extends JFrame implements ActionListener {
         existingGroup.add(no2);
 
         yes2.setBounds(250, 600, 100, 40);
+        yes2.setFocusable(false);
         no2.setBounds(350, 600, 100, 40);
+        no2.setFocusable(false);
         add(yes2);
         add(no2);
 
         cancel = new JButton("Cancel");
         cancel.setBounds(420, 670, 100, 40);
+        cancel.setFocusable(false);
         cancel.addActionListener(this);
         add(cancel);
 
         submit = new JButton("Submit");
         submit.setBounds(570, 670, 100, 40);
+        submit.setFocusable(false);
         submit.addActionListener(this);
         add(submit);
 

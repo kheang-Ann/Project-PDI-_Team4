@@ -22,6 +22,7 @@ public class Withdraw extends JFrame implements ActionListener {
 
         setSize(530, 400);
         setLocation(300, 0);
+        setLocationRelativeTo(null);
         setResizable(false);
         getContentPane().setBackground(Color.decode("#A1E3F9"));
 
@@ -72,12 +73,14 @@ public class Withdraw extends JFrame implements ActionListener {
         withdraw = new JButton("Withdraw");
         withdraw.setFont(new Font("Tahoma", Font.BOLD, 15));
         withdraw.setBounds(185, 200, 150, 40);
+        withdraw.setFocusable(false);
         withdraw.addActionListener(this);
         add(withdraw);
 
         back = new JButton("Exit");
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
         back.setBounds(185, 250, 150, 40);
+        back.setFocusable(false);
         back.addActionListener(this);
         add(back);
 

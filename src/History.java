@@ -12,8 +12,12 @@ public class History extends JFrame implements ActionListener {
     public History(String pin) {
         this.pin = pin;
 
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\ITC.png");
+        setIconImage(image.getImage());
+
         setSize(750, 750);
         setLocation(300, 0);
+        setLocationRelativeTo(null);
         getContentPane().setBackground(Color.decode("#00BD99"));
         setLayout(null);
 
@@ -31,6 +35,7 @@ public class History extends JFrame implements ActionListener {
         back = new JButton("Back");
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
         back.setBounds(280, 600, 150, 40);
+        back.setFocusable(false);
         back.addActionListener(this);
         add(back);
 

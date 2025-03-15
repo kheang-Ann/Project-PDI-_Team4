@@ -20,6 +20,7 @@ public class signupOne extends JFrame implements ActionListener{
 
         setSize(850, 800);
         setLocation(350, 10);
+        setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Sign Up");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,14 +73,17 @@ public class signupOne extends JFrame implements ActionListener{
         
         male = new JRadioButton("Male");
         male.setBounds(200,310,60,30);
+        male.setFocusable(false);
         add(male);
         
         female = new JRadioButton("Female");
         female.setBounds(400,310,200,40);
+        female.setFocusable(false);
         add(female);
         
         other = new JRadioButton("Other");
         other.setBounds(600,310,200,40);
+        other.setFocusable(false);
         add(other);
 
         ButtonGroup gendeGroup = new ButtonGroup();
@@ -195,6 +199,7 @@ public class signupOne extends JFrame implements ActionListener{
         //button next
         next = new JButton("Next");
         next.setBounds(570,670,70,40);
+        next.setFocusable(false);
         next.addActionListener(this);
         add(next);
 
