@@ -163,13 +163,13 @@ public class signupTwo extends JFrame implements ActionListener {
         add(no2);
 
         cancel = new JButton("Cancel");
-        cancel.setBounds(420, 670, 100, 40);
+        cancel.setBounds(570, 670, 100, 40);
         cancel.setFocusable(false);
         cancel.addActionListener(this);
         add(cancel);
 
         submit = new JButton("Submit");
-        submit.setBounds(570, 670, 100, 40);
+        submit.setBounds(420, 670, 100, 40);
         submit.setFocusable(false);
         submit.addActionListener(this);
         add(submit);
