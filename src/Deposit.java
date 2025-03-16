@@ -43,7 +43,7 @@ public class Deposit extends JFrame implements ActionListener {
 
         // Set a limit on the input length
         ((AbstractDocument) money.getDocument()).setDocumentFilter(new DocumentFilter() {
-            private static final int LIMIT = 10; // Set your limit here
+            private static final int LIMIT = 9; // Set your limit here
 
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
