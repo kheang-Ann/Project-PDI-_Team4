@@ -5,7 +5,7 @@ import javax.swing.*;
 public class Transaction extends JFrame implements ActionListener{
 
     JLabel Bank_acc;
-    JButton withdraw, deposit, Acc_list,transfer ,exit, changepin;
+    JButton withdraw, deposit, Acc_list,transfer ,exit, changepin, logout;
     String pin;
 
     Transaction(String pin){
@@ -84,6 +84,13 @@ public class Transaction extends JFrame implements ActionListener{
         exit.addActionListener(this);
         exit.setFocusable(false);
         add(exit);
+
+        logout = new JButton("Log out");
+        logout.setFont(new Font("Tahoma", Font.BOLD, 20));
+        logout.setBounds(250,600,300,40);
+        logout.addActionListener(this);
+        logout.setFocusable(false);
+        add(logout);
         
         setResizable(false);
         setVisible(true);
@@ -106,6 +113,9 @@ public class Transaction extends JFrame implements ActionListener{
         } else if(ae.getSource() == changepin){
             setVisible(false);
             new Pinchange(pin).setVisible(true);
+        } else if(ae.getSource() == logout){
+            setVisible(false);
+            new Login().setVisible(true);
         }
     }
     public static void main(String[] args) {
