@@ -72,6 +72,8 @@ public class Deposit extends JFrame implements ActionListener {
         deposit = new JButton("Deposit");
         deposit.setFont(new Font("Tahoma", Font.BOLD, 15));
         deposit.setBounds(210, 200, 100, 40);
+        deposit.setForeground(Color.WHITE);
+        deposit.setBackground(Color.BLUE);
         deposit.setFocusable(false);
         deposit.addActionListener(this);
         add(deposit);
@@ -79,6 +81,8 @@ public class Deposit extends JFrame implements ActionListener {
         back = new JButton("Exit");
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
         back.setBounds(210, 250, 100, 40);
+        back.setForeground(Color.WHITE);
+        back.setBackground(Color.RED);
         back.setFocusable(false);
         back.addActionListener(this);
         add(back);

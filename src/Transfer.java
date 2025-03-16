@@ -94,6 +94,8 @@ public class Transfer extends JFrame implements ActionListener {
         transfer = new JButton("Transfer");
         transfer.setFont(new Font("Tahoma", Font.BOLD, 15));
         transfer.setBounds(185, 220, 150, 40);
+        transfer.setForeground(Color.WHITE);
+        transfer.setBackground(Color.BLUE);
         transfer.addActionListener(this);
         transfer.setFocusable(false);
         add(transfer);
@@ -101,6 +103,8 @@ public class Transfer extends JFrame implements ActionListener {
         back = new JButton("Exit");
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
         back.setBounds(185, 270, 150, 40);
+        back.setForeground(Color.WHITE);
+        back.setBackground(Color.RED);
         back.addActionListener(this);
         back.setFocusable(false);
         add(back);

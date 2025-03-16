@@ -21,7 +21,8 @@ public class History extends JFrame implements ActionListener {
         setSize(750, 750);
         setLocation(300, 0);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(Color.decode("#00BD99"));
+        setResizable(false);
+        getContentPane().setBackground(Color.CYAN);
         setLayout(null);
 
         JLabel title = new JLabel("Transaction History");
@@ -30,21 +31,25 @@ public class History extends JFrame implements ActionListener {
         add(title);
 
         historyArea = new JTextArea();
-        historyArea.setBounds(50, 60, 650, 500);
+        historyArea.setBounds(40, 60, 650, 500);
         historyArea.setFont(new Font("Tahoma", Font.PLAIN, 15));
         historyArea.setEditable(false);
         add(historyArea);
 
         back = new JButton("Back");
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
-        back.setBounds(280, 600, 150, 40);
+        back.setBounds(390, 600, 150, 40);
+        back.setForeground(Color.WHITE);
+        back.setBackground(Color.GREEN);
         back.setFocusable(false);
         back.addActionListener(this);
         add(back);
         
         download = new JButton("Download CSV");
         download.setFont(new Font("Tahoma", Font.BOLD, 15));
-        download.setBounds(450, 600, 150, 40);
+        download.setBounds(190, 600, 150, 40);
+        download.setForeground(Color.WHITE);
+        download.setBackground(Color.BLUE);
         download.setFocusable(false);
         download.addActionListener(this);
         add(download);
