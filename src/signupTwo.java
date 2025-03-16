@@ -193,7 +193,7 @@ public class signupTwo extends JFrame implements ActionListener {
             String pinNumber = "" + (100 + new Random().nextInt(900)); // Ensures 3-digit number
 
             try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankmanagementsystem",
-                    "root", "!@ann2024@!")) {
+                    "root", "khemchhun250306")) {
 
                 String query1 = "INSERT INTO signupTwo (form, country, Sreligion, Income, Education, jobss, Pan, ID, SeniorCitizen, ExistingAccount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement ps1 = conn.prepareStatement(query1);
@@ -233,3 +233,4 @@ public class signupTwo extends JFrame implements ActionListener {
         new signupTwo("");
     }
 }
+

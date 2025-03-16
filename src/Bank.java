@@ -10,7 +10,7 @@ public class Bank {
     public Bank(){
         try {
             //Class.forName(com.mysql.cj.jdbc.Driver);
-            c = DriverManager.getConnection("jdbc:mysql:///bankmanagementsystem", "root","!@ann2024@!");
+            c = DriverManager.getConnection("jdbc:mysql:///bankmanagementsystem", "root","khemchhun250306");
             s = c.createStatement();
 
         } catch (Exception e) {
