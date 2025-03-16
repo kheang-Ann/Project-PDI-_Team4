@@ -11,9 +11,12 @@ public class Deposit extends JFrame implements ActionListener {
     JTextField money;
     JButton deposit, back;
     String pin;
+    Transaction transaction; // Reference to Transaction class
 
-    Deposit(String pin) {
+    // Constructor that accepts both pin and transaction
+    Deposit(String pin, Transaction transaction) {
         this.pin = pin;
+        this.transaction = transaction;
 
         setLayout(null);
 
@@ -23,11 +26,12 @@ public class Deposit extends JFrame implements ActionListener {
         setSize(530, 400);
         setLocation(300, 0);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(Color.decode("#0BC7D2"));
+        setResizable(false);
+        getContentPane().setBackground(Color.decode("#A1E3F9"));
 
         text = new JLabel("Deposit");
         text.setFont(new Font("Tahoma", Font.BOLD, 25));
-        text.setBounds(210, 10, 100, 40);
+        text.setBounds(195, 10, 200, 40);
         add(text);
 
         amount = new JLabel("Amount: ");
@@ -43,7 +47,7 @@ public class Deposit extends JFrame implements ActionListener {
 
         // Set a limit on the input length
         ((AbstractDocument) money.getDocument()).setDocumentFilter(new DocumentFilter() {
-            private static final int LIMIT = 10; // Set your limit here
+            private static final int LIMIT = 8; // Set your limit here
 
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
@@ -71,14 +75,14 @@ public class Deposit extends JFrame implements ActionListener {
 
         deposit = new JButton("Deposit");
         deposit.setFont(new Font("Tahoma", Font.BOLD, 15));
-        deposit.setBounds(210, 200, 100, 40);
+        deposit.setBounds(185, 200, 150, 40);
         deposit.setFocusable(false);
         deposit.addActionListener(this);
         add(deposit);
 
         back = new JButton("Exit");
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
-        back.setBounds(210, 250, 100, 40);
+        back.setBounds(185, 250, 150, 40);
         back.setFocusable(false);
         back.addActionListener(this);
         add(back);
@@ -91,31 +95,37 @@ public class Deposit extends JFrame implements ActionListener {
             String number = money.getText();
             Date date = new Date();
             if (number.equals("")) {
-                JOptionPane.showMessageDialog(null, "Please enter amount that you want to deposit.");
+                JOptionPane.showMessageDialog(null, "Please enter the amount you want to deposit.");
             } else {
                 try {
                     double amount = Double.parseDouble(number);
-                    DecimalFormat df = new DecimalFormat("#,##0."); // Ensures two decimal places
+                    DecimalFormat df = new DecimalFormat("#,##0.00"); // Ensures two decimal places
                     String formattedAmount = df.format(amount);
 
                     Bank bank = new Bank();
-                    String query = "insert into bank value('" + pin + "', '" + date + "', 'Deposit' , '" + formattedAmount + "')";
+                    String query = "INSERT INTO bank (pin, date, type, amount) VALUES ('" + pin + "', '" + date + "', 'Deposit', '" + formattedAmount + "')";
                     bank.s.executeUpdate(query);
 
-                    JOptionPane.showMessageDialog(null, "USD " + formattedAmount + " deposited successfully");
+                    // Update the balance in the Transaction class
+                    transaction.depositMoney(amount);
+
+                    JOptionPane.showMessageDialog(null, "USD " + formattedAmount + " deposited successfully.");
                     setVisible(false);
-                    new Transaction(pin).setVisible(true);
+                    transaction.setVisible(true); // Return to the Transaction window
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Invalid amount. Please enter a valid number.");
                 } catch (Exception e) {
                     System.out.println(e);
+                    JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.");
                 }
             }
         } else if (ae.getSource() == back) {
             setVisible(false);
-            new Transaction(pin).setVisible(true);
+            transaction.setVisible(true); // Return to the Transaction window
         }
     }
 
     public static void main(String[] args) {
-        new Deposit("");
+        new Deposit("", null); // For testing purposes
     }
 }

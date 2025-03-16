@@ -11,9 +11,12 @@ public class Withdraw extends JFrame implements ActionListener {
     JTextField money;
     JButton withdraw, back;
     String pin;
+    Transaction transaction; // Reference to Transaction class
 
-    Withdraw(String pin) {
+    // Constructor that accepts both pin and transaction
+    Withdraw(String pin, Transaction transaction) {
         this.pin = pin;
+        this.transaction = transaction;
 
         setLayout(null);
 
@@ -92,31 +95,37 @@ public class Withdraw extends JFrame implements ActionListener {
             String number = money.getText();
             Date date = new Date();
             if (number.equals("")) {
-                JOptionPane.showMessageDialog(null, "Please enter amount that you want to withdraw.");
+                JOptionPane.showMessageDialog(null, "Please enter the amount you want to withdraw.");
             } else {
                 try {
                     double amount = Double.parseDouble(number);
-                    DecimalFormat df = new DecimalFormat("#,##0."); // Ensures two decimal places
+                    DecimalFormat df = new DecimalFormat("#,##0.00"); // Ensures two decimal places
                     String formattedAmount = df.format(amount);
 
                     Bank bank = new Bank();
-                    String query = "insert into bank value('" + pin + "', '" + date + "', 'Withdraw' , '" + formattedAmount + "')";
+                    String query = "INSERT INTO bank (pin, date, type, amount) VALUES ('" + pin + "', '" + date + "', 'Withdraw', '" + formattedAmount + "')";
                     bank.s.executeUpdate(query);
 
-                    JOptionPane.showMessageDialog(null, "USD " + formattedAmount + " withdrawn successfully");
+                    // Update the balance in the Transaction class
+                    transaction.withdrawMoney(amount);
+
+                    JOptionPane.showMessageDialog(null, "USD " + formattedAmount + " withdrawn successfully.");
                     setVisible(false);
-                    new Transaction(pin).setVisible(true);
+                    transaction.setVisible(true); // Return to the Transaction window
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Invalid amount. Please enter a valid number.");
                 } catch (Exception e) {
                     System.out.println(e);
+                    JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.");
                 }
             }
         } else if (ae.getSource() == back) {
             setVisible(false);
-            new Transaction(pin).setVisible(true);
+            transaction.setVisible(true); // Return to the Transaction window
         }
     }
 
     public static void main(String[] args) {
-        new Withdraw("");
+        new Withdraw("", null); // For testing purposes
     }
 }

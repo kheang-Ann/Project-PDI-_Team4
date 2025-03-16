@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.Date;
 import javax.swing.*;
 import javax.swing.text.*;
 
@@ -12,9 +12,12 @@ public class Transfer extends JFrame implements ActionListener {
     JTextField money, card;
     JButton transfer, back;
     String pin;
+    Transaction transaction; // Reference to Transaction class
 
-    Transfer(String pin) {
+    // Constructor that accepts both pin and transaction
+    Transfer(String pin, Transaction transaction) {
         this.pin = pin;
+        this.transaction = transaction;
 
         setLayout(null);
 
@@ -111,15 +114,26 @@ public class Transfer extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == transfer) {
             String number = money.getText();
-            if (number.equals("")) {
-                JOptionPane.showMessageDialog(null, "Please enter the amount that you want to transfer.");
+            String targetCardNumber = card.getText();
+            if (number.equals("") || targetCardNumber.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please enter the amount and target card number.");
             } else {
-                setVisible(false);
-                new verify(pin, number).setVisible(true);
+                try {
+                    double amount = Double.parseDouble(number);
+                    if (amount <= 0) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid amount greater than zero.");
+                        return;
+                    }
+
+                    setVisible(false);
+                    new verify(pin, targetCardNumber, number, transaction).setVisible(true);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Invalid amount. Please enter a valid number.");
+                }
             }
         } else if (ae.getSource() == back) {
             setVisible(false);
-            new Transaction(pin).setVisible(true);
+            transaction.setVisible(true); // Return to the Transaction window
         }
     }
 
@@ -129,10 +143,14 @@ public class Transfer extends JFrame implements ActionListener {
         JLabel pinn, text;
         String code;
         String amount;
+        String targetCardNumber;
+        Transaction transaction; // Reference to Transaction class
 
-        public verify(String code, String amount) {
+        public verify(String code, String targetCardNumber, String amount, Transaction transaction) {
             this.code = code;
             this.amount = amount;
+            this.targetCardNumber = targetCardNumber;
+            this.transaction = transaction;
 
             setLayout(null);
 
@@ -182,7 +200,7 @@ public class Transfer extends JFrame implements ActionListener {
         public void actionPerformed(ActionEvent ea) {
             if (ea.getSource() == Back) {
                 setVisible(false);
-                new Transfer(code).setVisible(true);
+                new Transfer(code, transaction).setVisible(true);
             } else if (ea.getSource() == pins) {
                 Bank b = new Bank();
                 @SuppressWarnings("deprecation")
@@ -211,23 +229,34 @@ public class Transfer extends JFrame implements ActionListener {
         private void transferMoney() {
             try {
                 double amountValue = Double.parseDouble(amount);
-                DecimalFormat df = new DecimalFormat("#,##0."); // Ensures two decimal places
+                DecimalFormat df = new DecimalFormat("#,##0.00"); // Ensures two decimal places
                 String formattedAmount = df.format(amountValue);
 
                 Bank bank = new Bank();
                 Date date = new Date();
-                String query = "insert into bank value('" + code + "', '" + date + "', 'Transferred' , '" + formattedAmount + "')";
-                bank.s.executeUpdate(query);
 
-                JOptionPane.showMessageDialog(null, "USD " + formattedAmount + " transferred successfully");
-                new Transaction(code).setVisible(true);
+                // Deduct from sender
+                String query1 = "UPDATE UserBalance SET Balance = Balance - " + amountValue + " WHERE cardnumber = (SELECT cardnumber FROM login WHERE pin = '" + code + "')";
+                bank.s.executeUpdate(query1);
+
+                // Add to receiver
+                String query2 = "UPDATE UserBalance SET Balance = Balance + " + amountValue + " WHERE cardnumber = '" + targetCardNumber + "'";
+                bank.s.executeUpdate(query2);
+
+                // Record the transaction
+                String query3 = "INSERT INTO bank (pin, date, type, amount) VALUES ('" + code + "', '" + date + "', 'Transferred', '" + formattedAmount + "')";
+                bank.s.executeUpdate(query3);
+
+                JOptionPane.showMessageDialog(null, "USD " + formattedAmount + " transferred successfully to card number " + targetCardNumber);
+                transaction.setVisible(true); // Return to the Transaction window
             } catch (Exception e) {
                 System.out.println(e);
+                JOptionPane.showMessageDialog(null, "An error occurred while transferring money.");
             }
         }
     }
 
     public static void main(String[] args) {
-        new Transfer("");
+        new Transfer("", null); // For testing purposes
     }
 }
