@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.*;
@@ -7,7 +9,8 @@ import javax.swing.*;
 public class History extends JFrame implements ActionListener {
 
     String pin;
-    JButton back;
+    JButton back, download;
+    JTextArea historyArea;
 
     public History(String pin) {
         this.pin = pin;
@@ -26,7 +29,7 @@ public class History extends JFrame implements ActionListener {
         title.setBounds(280, 20, 200, 30);
         add(title);
 
-        JTextArea historyArea = new JTextArea();
+        historyArea = new JTextArea();
         historyArea.setBounds(50, 60, 650, 500);
         historyArea.setFont(new Font("Tahoma", Font.PLAIN, 15));
         historyArea.setEditable(false);
@@ -38,15 +41,20 @@ public class History extends JFrame implements ActionListener {
         back.setFocusable(false);
         back.addActionListener(this);
         add(back);
+        
+        download = new JButton("Download CSV");
+        download.setFont(new Font("Tahoma", Font.BOLD, 15));
+        download.setBounds(450, 600, 150, 40);
+        download.setFocusable(false);
+        download.addActionListener(this);
+        add(download);
 
         Bank bank = new Bank();
         List<String> history = bank.getTransactionHistory(pin);
 
-        // Debugging: Print the pin and the size of the history list
         System.out.println("PIN: " + pin);
         System.out.println("Number of transactions: " + history.size());
 
-        // Reverse the order of the transactions
         Collections.reverse(history);
 
         for (String transaction : history) {
@@ -60,6 +68,28 @@ public class History extends JFrame implements ActionListener {
         if (ae.getSource() == back) {
             setVisible(false);
             new Transaction(pin).setVisible(true);
+        } else if (ae.getSource() == download) {
+            saveHistoryAsCSV();
+        }
+    }
+
+    private void saveHistoryAsCSV() {
+        try {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Save CSV");
+            int userSelection = fileChooser.showSaveDialog(this);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                String filePath = fileChooser.getSelectedFile().getAbsolutePath() + ".csv";
+                FileWriter writer = new FileWriter(filePath);
+                writer.write("Transaction History\n");
+                writer.write(historyArea.getText().replace("\n", "\r\n"));
+                writer.close();
+                JOptionPane.showMessageDialog(this, "History saved successfully!");
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error saving history", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
 
