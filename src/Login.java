@@ -18,7 +18,7 @@ public class Login extends JFrame implements ActionListener {
 
         // Background Image with 60% opacity
         try {
-            BufferedImage backgroundImage = ImageIO.read(new File("C:\\Users\\ASUS\\Pictures\\Background1.jpg"));
+            BufferedImage backgroundImage = ImageIO.read(new File("E:\\Java Y2\\Project(PDI)\\Background1.jpg"));
             BufferedImage transparentImage = new BufferedImage(backgroundImage.getWidth(), backgroundImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = transparentImage.createGraphics();
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));

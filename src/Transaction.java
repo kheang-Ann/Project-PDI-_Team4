@@ -6,7 +6,7 @@ import javax.swing.*;
 public class Transaction extends JFrame implements ActionListener {
 
     JLabel Bank_acc, balanceLabel; // Added balanceLabel
-    JButton withdraw, deposit, Acc_list, transfer, exit, changepin;
+    JButton withdraw, deposit, Acc_list, transfer, exit, changepin, logout;
     String pin;
 
     Transaction(String pin) {
@@ -23,6 +23,34 @@ public class Transaction extends JFrame implements ActionListener {
         JLabel label = new JLabel(l3);
         label.setBounds(30, 0, 180, 180);
         add(label);
+
+        ImageIcon DP = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Deposit.png");
+        Image DP1 = DP.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        ImageIcon DP2 = new ImageIcon(DP1);
+
+        ImageIcon T = new ImageIcon("E:\\Java Y2\\Project(PDI)\\transfer.png");
+        Image T1 = T.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        ImageIcon T2 = new ImageIcon(T1);
+
+        ImageIcon P = new ImageIcon("E:\\Java Y2\\Project(PDI)\\pinChange.png");
+        Image P1 = P.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        ImageIcon P2 = new ImageIcon(P1);
+
+        ImageIcon H = new ImageIcon("E:\\Java Y2\\Project(PDI)\\HIstory.png");
+        Image H1 = H.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        ImageIcon H2 = new ImageIcon(H1);
+
+        ImageIcon W = new ImageIcon("E:\\Java Y2\\Project(PDI)\\withdraw.png");
+        Image W1 = W.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        ImageIcon W2 = new ImageIcon(W1);
+
+        ImageIcon L = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Logout.png");
+        Image L1 = L.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        ImageIcon L2 = new ImageIcon(L1);
+
+        ImageIcon E = new ImageIcon("E:\\Java Y2\\Project(PDI)\\E.png");
+        Image E1 = E.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        ImageIcon E2 = new ImageIcon(E1);
 
         setSize(800, 800);
         setLocation(300, 0);
@@ -44,47 +72,68 @@ public class Transaction extends JFrame implements ActionListener {
         // Fetch and display the balance when the Transaction page is opened
         updateBalanceLabel();
 
-        deposit = new JButton("Deposit");
+        deposit = new JButton("Deposit", DP2);
         deposit.setFont(new Font("Tahoma", Font.BOLD, 20));
-        deposit.setBounds(250, 300, 300, 40);
+        deposit.setBounds(280,300,250,40);
+        deposit.setForeground(Color.WHITE);
+        deposit.setBackground(Color.BLUE);
         deposit.addActionListener(this);
         deposit.setFocusable(false);
         add(deposit);
 
-        withdraw = new JButton("Withdraw");
+        withdraw = new JButton("Withdraw",W2);
         withdraw.setFont(new Font("Tahoma", Font.BOLD, 20));
-        withdraw.setBounds(250, 350, 300, 40);
+        withdraw.setBounds(280,350,250,40);
+        withdraw.setForeground(Color.WHITE);
+        withdraw.setBackground(Color.BLUE);
         withdraw.addActionListener(this);
         withdraw.setFocusable(false);
         add(withdraw);
 
-        transfer = new JButton("Transfer");
+        transfer = new JButton("Transfer", T2);
         transfer.setFont(new Font("Tahoma", Font.BOLD, 20));
-        transfer.setBounds(250, 400, 300, 40);
+        transfer.setBounds(280,400,250,40);
+        transfer.setForeground(Color.WHITE);
+        transfer.setBackground(Color.BLUE);
         transfer.addActionListener(this);
         transfer.setFocusable(false);
         add(transfer);
 
-        Acc_list = new JButton("View History");
+        Acc_list = new JButton("View History", H2);
         Acc_list.setFont(new Font("Tahoma", Font.BOLD, 20));
-        Acc_list.setBounds(250, 500, 300, 40);
+        Acc_list.setBounds(280,500,250,40);
+        Acc_list.setForeground(Color.WHITE);
+        Acc_list.setBackground(Color.BLUE);
         Acc_list.addActionListener(this);
         Acc_list.setFocusable(false);
         add(Acc_list);
 
-        changepin = new JButton("Change Pin");
+        changepin = new JButton("Change Pin", P2);
         changepin.setFont(new Font("Tahoma", Font.BOLD, 20));
-        changepin.setBounds(250, 450, 300, 40);
+        changepin.setBounds(280,450,250,40);
+        changepin.setForeground(Color.WHITE);
+        changepin.setBackground(Color.BLUE);
         changepin.addActionListener(this);
         changepin.setFocusable(false);
         add(changepin);
 
-        exit = new JButton("Exit");
+        exit = new JButton("Exit", E2);
         exit.setFont(new Font("Tahoma", Font.BOLD, 20));
-        exit.setBounds(250, 550, 300, 40);
+        exit.setBounds(280,550,250,40);
+        exit.setForeground(Color.white);
+        exit.setBackground(Color.RED);
         exit.addActionListener(this);
         exit.setFocusable(false);
         add(exit);
+
+        logout = new JButton("Logout", L2);
+        logout.setFont(new Font("Tahoma", Font.BOLD, 20));
+        logout.setBounds(280,600,250,40);
+        logout.setForeground(Color.WHITE);
+        logout.setBackground(Color.RED);
+        logout.addActionListener(this);
+        logout.setFocusable(false);
+        add(logout);
 
         setResizable(false);
         setVisible(true);
@@ -108,6 +157,9 @@ public class Transaction extends JFrame implements ActionListener {
         } else if (ae.getSource() == changepin) {
             setVisible(false);
             new Pinchange(pin).setVisible(true);
+        } else if(ae.getSource() == logout ){
+            setVisible(false);
+            new Login().setVisible(true);
         }
     }
 
