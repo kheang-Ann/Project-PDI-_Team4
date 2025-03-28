@@ -14,41 +14,41 @@ public class Transaction extends JFrame implements ActionListener {
 
         setLayout(null);
 
-        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\ITC.png");
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\ITC.png");
         setIconImage(image.getImage());
 
-        ImageIcon l1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\image.png");
+        ImageIcon l1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\image.png");
         Image l2 = l1.getImage().getScaledInstance(180, 180, Image.SCALE_DEFAULT);
         ImageIcon l3 = new ImageIcon(l2);
         JLabel label = new JLabel(l3);
         label.setBounds(30, 0, 180, 180);
         add(label);
 
-        ImageIcon DP = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Deposit.png");
+        ImageIcon DP = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\Deposit.png");
         Image DP1 = DP.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         ImageIcon DP2 = new ImageIcon(DP1);
 
-        ImageIcon T = new ImageIcon("E:\\Java Y2\\Project(PDI)\\transfer.png");
+        ImageIcon T = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\transfer.png");
         Image T1 = T.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         ImageIcon T2 = new ImageIcon(T1);
 
-        ImageIcon P = new ImageIcon("E:\\Java Y2\\Project(PDI)\\pinChange.png");
+        ImageIcon P = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\pinChange.png");
         Image P1 = P.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         ImageIcon P2 = new ImageIcon(P1);
 
-        ImageIcon H = new ImageIcon("E:\\Java Y2\\Project(PDI)\\HIstory.png");
+        ImageIcon H = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\HIstory.png");
         Image H1 = H.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         ImageIcon H2 = new ImageIcon(H1);
 
-        ImageIcon W = new ImageIcon("E:\\Java Y2\\Project(PDI)\\withdraw.png");
+        ImageIcon W = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\withdraw.png");
         Image W1 = W.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         ImageIcon W2 = new ImageIcon(W1);
 
-        ImageIcon L = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Logout.png");
+        ImageIcon L = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\Logout.png");
         Image L1 = L.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         ImageIcon L2 = new ImageIcon(L1);
 
-        ImageIcon E = new ImageIcon("E:\\Java Y2\\Project(PDI)\\E.png");
+        ImageIcon E = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\E.png");
         Image E1 = E.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         ImageIcon E2 = new ImageIcon(E1);
 

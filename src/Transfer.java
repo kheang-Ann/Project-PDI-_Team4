@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
-import java.text.DecimalFormat;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.text.*;
@@ -21,7 +20,7 @@ public class Transfer extends JFrame implements ActionListener {
 
         setLayout(null);
 
-        ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\ITC.png");
         setIconImage(image.getImage());
 
         setTitle("Transfer");
@@ -233,8 +232,8 @@ public class Transfer extends JFrame implements ActionListener {
         private void transferMoney() {
             try {
                 double amountValue = Double.parseDouble(amount);
-                DecimalFormat df = new DecimalFormat("#,##0.00"); // Ensures two decimal places
-                String formattedAmount = df.format(amountValue);
+                // DecimalFormat df = new DecimalFormat("#,##0.00"); // Ensures two decimal places
+                // String formattedAmount = df.format(amountValue);
 
                 Bank bank = new Bank();
                 Date date = new Date();
@@ -248,10 +247,10 @@ public class Transfer extends JFrame implements ActionListener {
                 bank.s.executeUpdate(query2);
 
                 // Record the transaction
-                String query3 = "INSERT INTO bank (pin, date, type, amount) VALUES ('" + code + "', '" + date + "', 'Transferred', '" + formattedAmount + "')";
+                String query3 = "INSERT INTO bank (pin, date, type, amount) VALUES ('" + code + "', '" + date + "', 'Transferred', '" + amountValue + "')";
                 bank.s.executeUpdate(query3);
 
-                JOptionPane.showMessageDialog(null, "USD " + formattedAmount + " transferred successfully to card number " + targetCardNumber);
+                JOptionPane.showMessageDialog(null, "USD " + amountValue + " transferred successfully to card number " + targetCardNumber);
                 transaction.setVisible(true); // Return to the Transaction window
             } catch (Exception e) {
                 System.out.println(e);

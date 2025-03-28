@@ -18,7 +18,7 @@ public class Login extends JFrame implements ActionListener {
 
         // Background Image with 60% opacity
         try {
-            BufferedImage backgroundImage = ImageIO.read(new File("E:\\Java Y2\\Project(PDI)\\Background1.jpg"));
+            BufferedImage backgroundImage = ImageIO.read(new File("E:\\Java Y2\\Project(PDI)\\Pictures\\Background1.jpg"));
             BufferedImage transparentImage = new BufferedImage(backgroundImage.getWidth(), backgroundImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = transparentImage.createGraphics();
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
@@ -32,7 +32,7 @@ public class Login extends JFrame implements ActionListener {
             // Adding components to the background label
             backgroundLabel.setLayout(null);
 
-            ImageIcon l1 = new ImageIcon("D:\\All of my lessons\\Project-PDI-Team4\\Project-PDI-_Team4\\src\\image.png");
+            ImageIcon l1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\image.png");
             Image l2 = l1.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
             ImageIcon l3 = new ImageIcon(l2);
             JLabel label = new JLabel(l3);
@@ -45,7 +45,7 @@ public class Login extends JFrame implements ActionListener {
             setLocationRelativeTo(null);
             setResizable(false);
 
-            ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
+            ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\ITC.png");
             setIconImage(image.getImage());
 
             // Welcome Screen

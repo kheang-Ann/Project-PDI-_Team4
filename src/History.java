@@ -15,7 +15,7 @@ public class History extends JFrame implements ActionListener {
     public History(String pin) {
         this.pin = pin;
 
-        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\ITC.png");
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\ITC.png");
         setIconImage(image.getImage());
 
         setSize(750, 750);

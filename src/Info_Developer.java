@@ -15,12 +15,12 @@ public class Info_Developer extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setLayout(null);
 
-        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\ITC.png");
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\ITC.png");
         setIconImage(image.getImage());
 
         // Background Panel
         JLabel background = new JLabel(new ImageIcon(new ImageIcon(
-            "E:\\Java Y2\\Project(PDI)\\backgrond.jpg")
+            "E:\\Java Y2\\Project(PDI)\\Pictures\\backgrond.jpg")
             .getImage().getScaledInstance(1024, 700, Image.SCALE_SMOOTH)));
 
         background.setLayout(new GridBagLayout()); // Center everything
@@ -78,9 +78,9 @@ public class Info_Developer extends JFrame implements ActionListener {
         teamPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 20)); // Add spacing
         teamPanel.setOpaque(false);
 
-        teamPanel.add(createTeamMember("Backend(Leader)", "Kheang Ann", "E:\\Java Y2\\Project(PDI)\\ann.JPG", "https://kheangann.netlify.app/"));
-        teamPanel.add(createTeamMember("Frontend(Assistant)", "Tat Chansereyvong", "E:\\Java Y2\\Project(PDI)\\Vong.jpg", "https://practice-uxui.netlify.app/"));
-        teamPanel.add(createTeamMember("Database(Assistant)", "Try Khemchhun", "E:\\Java Y2\\Project(PDI)\\chhun.jpg", "https://trykhemchhun.netlify.app/"));
+        teamPanel.add(createTeamMember("Backend(Leader)", "Kheang Ann", "E:\\Java Y2\\Project(PDI)\\Pictures\\ann.JPG", "https://kheangann.netlify.app/"));
+        teamPanel.add(createTeamMember("Frontend(Assistant)", "Tat Chansereyvong", "E:\\Java Y2\\Project(PDI)\\Pictures\\Vong.jpg", "https://practice-uxui.netlify.app/"));
+        teamPanel.add(createTeamMember("Database(Assistant)", "Try Khemchhun", "E:\\Java Y2\\Project(PDI)\\Pictures\\chhun.jpg", "https://trykhemchhun.netlify.app/"));
 
         return teamPanel;
     }

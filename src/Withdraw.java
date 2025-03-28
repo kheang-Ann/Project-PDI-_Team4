@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.text.DecimalFormat;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.text.*;
@@ -20,7 +19,7 @@ public class Withdraw extends JFrame implements ActionListener {
 
         setLayout(null);
 
-        ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\ITC.png");
         setIconImage(image.getImage());
 
         setSize(530, 400);
@@ -103,17 +102,17 @@ public class Withdraw extends JFrame implements ActionListener {
             } else {
                 try {
                     double amount = Double.parseDouble(number);
-                    DecimalFormat df = new DecimalFormat("#,##0.00"); // Ensures two decimal places
-                    String formattedAmount = df.format(amount);
+                    //DecimalFormat df = new DecimalFormat("#,##0.00"); // Ensures two decimal places
+                    //String formattedAmount = df.format(amount);
 
                     Bank bank = new Bank();
-                    String query = "INSERT INTO bank (pin, date, type, amount) VALUES ('" + pin + "', '" + date + "', 'Withdraw', '" + formattedAmount + "')";
+                    String query = "INSERT INTO bank (pin, date, type, amount) VALUES ('" + pin + "', '" + date + "', 'Withdraw', '" + amount + "')";
                     bank.s.executeUpdate(query);
 
                     // Update the balance in the Transaction class
                     transaction.withdrawMoney(amount);
 
-                    JOptionPane.showMessageDialog(null, "USD " + formattedAmount + " withdrawn successfully.");
+                    JOptionPane.showMessageDialog(null, "USD " + amount + " withdrawn successfully.");
                     setVisible(false);
                     transaction.setVisible(true); // Return to the Transaction window
                 } catch (NumberFormatException e) {

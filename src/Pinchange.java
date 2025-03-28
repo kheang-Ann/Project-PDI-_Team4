@@ -11,7 +11,7 @@ public class Pinchange extends JFrame implements ActionListener{
         this.pinchange = pinchange;
         setLayout(null);
 
-        ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\ITC.png");
         setIconImage(image.getImage());
 
 

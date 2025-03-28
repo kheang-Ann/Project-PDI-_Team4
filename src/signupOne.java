@@ -25,10 +25,10 @@ public class signupOne extends JFrame implements ActionListener{
         setTitle("Sign Up");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ImageIcon image = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Pictures\\Saved Pictures\\ITC.png");
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\ITC.png");
         setIconImage(image.getImage());
         
-        ImageIcon I1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\image.png");
+        ImageIcon I1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\image.png");
         Image I2 = I1.getImage().getScaledInstance(100, 100, DO_NOTHING_ON_CLOSE);
         ImageIcon I3 = new ImageIcon(I2);
         JLabel label = new JLabel(I3);
