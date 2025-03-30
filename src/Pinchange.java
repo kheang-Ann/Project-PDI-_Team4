@@ -113,6 +113,9 @@ public class Pinchange extends JFrame implements ActionListener {
                     return;
                 }
 
+                // Hash the new PIN
+                String hashedNewPin = Security.hashPassword(npin);
+
                 Bank bank = new Bank();
 
                 try {
@@ -120,16 +123,18 @@ public class Pinchange extends JFrame implements ActionListener {
                     bank.s.getConnection().setAutoCommit(false);
 
                     // CRITICAL: First, insert the new PIN into verify table
-                    String insertVerifyQuery = "INSERT IGNORE INTO verify (pin) VALUES ('" + npin + "')";
+                    String insertVerifyQuery = "INSERT IGNORE INTO verify (pin) VALUES ('" + hashedNewPin + "')";
                     bank.s.executeUpdate(insertVerifyQuery);
 
                     // Then update all tables that reference the verify table
                     // Update login table
-                    String updateLoginQuery = "UPDATE login SET pin = '" + npin + "' WHERE pin = '" + pinchange + "'";
+                    String updateLoginQuery = "UPDATE login SET pin = '" + hashedNewPin + "' WHERE pin = '" + pinchange
+                            + "'";
                     int loginResult = bank.s.executeUpdate(updateLoginQuery);
 
                     // Update bank table
-                    String updateBankQuery = "UPDATE bank SET pin = '" + npin + "' WHERE pin = '" + pinchange + "'";
+                    String updateBankQuery = "UPDATE bank SET pin = '" + hashedNewPin + "' WHERE pin = '" + pinchange
+                            + "'";
                     int bankResult = bank.s.executeUpdate(updateBankQuery);
 
                     // Delete the old PIN from verify table AFTER updating all references
@@ -160,6 +165,7 @@ public class Pinchange extends JFrame implements ActionListener {
                     } else {
                         JOptionPane.showMessageDialog(null, "No records found to update. PIN change failed.");
                     }
+
 
                 } catch (Exception sqlEx) {
                     // Roll back in case of error

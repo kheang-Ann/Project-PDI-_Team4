@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -129,27 +130,38 @@ public class Login extends JFrame implements ActionListener {
         }
     }
 
-    public void actionPerformed(ActionEvent e) {
+ public void actionPerformed(ActionEvent e) {
         if (e.getSource() == clear) {
             textField.setText("");
             textField_1.setText("");
         } else if (e.getSource() == login) {
             Bank bank = new Bank();
             String cardnumber = textField.getText();
-            String pin = textField_1.getText();
+            String enteredPin = textField_1.getText();
 
-            String qucry = "select * from login where cardnumber = '" + cardnumber + "' and pin = '" + pin + "'";
+            // Use prepared statements to prevent SQL injection
+            String query = "SELECT pin FROM login WHERE cardnumber = ?";
             try {
-                ResultSet set = bank.s.executeQuery(qucry);
+                PreparedStatement pstmt = bank.c.prepareStatement(query);
+                pstmt.setString(1, cardnumber);
+                ResultSet set = pstmt.executeQuery();
+
                 if (set.next()) {
-                    setVisible(false);
-                    new Transaction(pin).setVisible(true);
+                    String storedHashedPin = set.getString("pin");
+
+                    // Verify the entered PIN against the stored hash
+                    if (Security.verifyPassword(enteredPin, storedHashedPin)) {
+                        setVisible(false);
+                        new Transaction(storedHashedPin).setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Incorrect Card Number or Pin Number");
+                    }
                 } else {
-                    System.out.println("Pin verification failed");
-                    JOptionPane.showMessageDialog(null, "Incorrect Card Number or Pin Number");
+                    JOptionPane.showMessageDialog(null, "Card number not found");
                 }
             } catch (Exception ex) {
                 System.out.println(ex);
+                ex.printStackTrace();
             }
         } else if (e.getSource() == SignUP) {
             setVisible(false);

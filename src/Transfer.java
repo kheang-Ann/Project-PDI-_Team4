@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 import javax.swing.*;
@@ -114,6 +115,7 @@ public class Transfer extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == transfer) {
             String number = money.getText();
@@ -211,25 +213,30 @@ public class Transfer extends JFrame implements ActionListener {
             } else if (ea.getSource() == pins) {
                 Bank b = new Bank();
                 @SuppressWarnings("deprecation")
-                String pin = fill_pin.getText();
+                String enteredPin = fill_pin.getText();
 
-                if (pin.isEmpty()) {
+                if (enteredPin.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please enter the pin.");
                     return;
                 }
 
-                String query = "select * from verify where pin = '" + pin + "'";
+
                 try {
-                    ResultSet set = b.s.executeQuery(query);
+                    // Get the stored hashed PIN
+                    String query = "SELECT pin FROM verify WHERE pin = ?";
+                    PreparedStatement pstmt = b.c.prepareStatement(query);
+                    pstmt.setString(1, code); // Use the stored PIN hash received from Transaction
+                    ResultSet set = pstmt.executeQuery();
+                    
                     if (set.next()) {
                         setVisible(false);
                         transferMoney();
-                        setVisible(false);
-                        new Transaction(pin).setVisible(true);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Incorrect pin number!");
+                        JOptionPane.showMessageDialog(null, "PIN verification failed. Please contact support.");
                     }
                 } catch (Exception ex) {
+                    System.out.println(ex);
+                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "An error occurred while verifying the pin.");
                 }
             }
@@ -238,28 +245,38 @@ public class Transfer extends JFrame implements ActionListener {
         private void transferMoney() {
             try {
                 double amountValue = Double.parseDouble(amount);
-                // DecimalFormat df = new DecimalFormat("#,##0.00"); // Ensures two decimal places
-                // String formattedAmount = df.format(amountValue);
-
                 Bank bank = new Bank();
                 Date date = new Date();
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-                // Deduct from sender
-                String query1 = "UPDATE UserBalance SET Balance = Balance - " + amountValue + " WHERE cardnumber = (SELECT cardnumber FROM login WHERE pin = '" + code + "')";
-                bank.s.executeUpdate(query1);
+                // Deduct from sender using prepared statement
+                String query1 = "UPDATE UserBalance SET Balance = Balance - ? WHERE cardnumber = (SELECT cardnumber FROM login WHERE pin = ?)";
+                PreparedStatement ps1 = bank.c.prepareStatement(query1);
+                ps1.setDouble(1, amountValue);
+                ps1.setString(2, code); // code is already the hashed PIN
+                ps1.executeUpdate();
 
-                // Add to receiver
-                String query2 = "UPDATE UserBalance SET Balance = Balance + " + amountValue + " WHERE cardnumber = '" + targetCardNumber + "'";
-                bank.s.executeUpdate(query2);
+                // Add to receiver using prepared statement
+                String query2 = "UPDATE UserBalance SET Balance = Balance + ? WHERE cardnumber = ?";
+                PreparedStatement ps2 = bank.c.prepareStatement(query2);
+                ps2.setDouble(1, amountValue);
+                ps2.setString(2, targetCardNumber);
+                ps2.executeUpdate();
 
-                // Record the transaction
-                String query3 = "INSERT INTO bank (pin, date, type, amount) VALUES ('" + code + "', '" + date + "', 'Transferred', '" + amountValue + "')";
-                bank.s.executeUpdate(query3);
+                // Record transaction using prepared statement
+                String query3 = "INSERT INTO bank (pin, date, type, amount) VALUES (?, ?, ?, ?)";
+                PreparedStatement ps3 = bank.c.prepareStatement(query3);
+                ps3.setString(1, code);
+                ps3.setDate(2, sqlDate);
+                ps3.setString(3, "Transferred");
+                ps3.setDouble(4, amountValue);
+                ps3.executeUpdate();
 
                 JOptionPane.showMessageDialog(null, "USD " + amountValue + " transferred successfully to card number " + targetCardNumber);
                 transaction.setVisible(true); // Return to the Transaction window
             } catch (Exception e) {
                 System.out.println(e);
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "An error occurred while transferring money.");
             }
         }

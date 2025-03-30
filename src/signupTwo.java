@@ -107,6 +107,7 @@ public class signupTwo extends JFrame implements ActionListener {
             }
         });
 
+
         JLabel IDcardLabel = new JLabel("National ID Card: ");
         IDcardLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         IDcardLabel.setBounds(50, 500, 200, 40);
@@ -196,45 +197,51 @@ public class signupTwo extends JFrame implements ActionListener {
             String cardNumber = "" + (1000000 + new Random().nextInt(9000000)); // Ensures 7-digit number
             String pinNumber = "" + (100 + new Random().nextInt(900)); // Ensures 3-digit number
 
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankmanagementsystem",
-                    "root", "khemchhun250306")) {
+            // Hash the PIN before storing it
+            String hashedPin = Security.hashPassword(pinNumber);
 
-                String query1 = "INSERT INTO signupTwo (form, country, Sreligion, Income, Education, jobss, Pan, ID, SeniorCitizen, ExistingAccount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                PreparedStatement ps1 = conn.prepareStatement(query1);
-                ps1.setString(1, form);
-                ps1.setString(2, country);
-                ps1.setString(3, Sreligion);
-                ps1.setString(4, sincome);
-                ps1.setString(5, Edu);
-                ps1.setString(6, jobss);
-                ps1.setString(7, phone);
-                ps1.setString(8, id);
-                ps1.setString(9, senior);
-                ps1.setString(10, existingAccount);
-                ps1.executeUpdate();
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql:///bankmanagementsystem",
+                    "root", "!@ann2024@!")) {
 
-                String query2 = "CALL insert_pin(?, ?, ?)";
-                PreparedStatement ps2 = conn.prepareStatement(query2);
-                ps2.setString(1, pinNumber);
-                ps2.setString(2, form);
-                ps2.setString(3, cardNumber);
-                ps2.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "Card number: " + cardNumber + "\nPIN: " + pinNumber);
-                setVisible(false);
-                new Login().setVisible(true);
-
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+                        String query1 = "INSERT INTO signupTwo (form, country, Sreligion, Income, Education, jobss, Pan, ID, SeniorCitizen, ExistingAccount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        PreparedStatement ps1 = conn.prepareStatement(query1);
+                        ps1.setString(1, form);
+                        ps1.setString(2, country);
+                        ps1.setString(3, Sreligion);
+                        ps1.setString(4, sincome);
+                        ps1.setString(5, Edu);
+                        ps1.setString(6, jobss);
+                        ps1.setString(7, phone);
+                        ps1.setString(8, id);
+                        ps1.setString(9, senior);
+                        ps1.setString(10, existingAccount);
+                        ps1.executeUpdate();
+        
+                        // Use your stored procedure correctly
+                        String query2 = "CALL insert_pin_and_balance(?, ?, ?)"; // Make sure this matches your procedure name
+                        PreparedStatement ps2 = conn.prepareStatement(query2);
+                        ps2.setString(1, hashedPin); // Store the hashed PIN in the database
+                        ps2.setString(2, form);
+                        ps2.setString(3, cardNumber);
+                        ps2.executeUpdate();
+        
+                        // Show the original PIN to the user (not the hash)
+                        JOptionPane.showMessageDialog(null, "Card number: " + cardNumber + "\nPIN: " + pinNumber);
+                        setVisible(false);
+                        new Login().setVisible(true);
+        
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                } else if (e.getSource() == cancel) {
+                    setVisible(false);
+                    new Login().setVisible(true);
+                }
             }
-        } else if (e.getSource() == cancel) {
-            setVisible(false);
-            new Login().setVisible(true);
+        
+            public static void main(String[] args) {
+                new signupTwo("");
+            }
         }
-    }
-
-    public static void main(String[] args) {
-        new signupTwo("");
-    }
-}
-
+        
