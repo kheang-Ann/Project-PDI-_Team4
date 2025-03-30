@@ -22,10 +22,10 @@ public class signupTwo extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\ITC.png");
+        ImageIcon image = new ImageIcon("Project-PDI-_Team4/Pictures/ITC.png");
         setIconImage(image.getImage());
 
-        ImageIcon I1 = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\image.png");
+        ImageIcon I1 = new ImageIcon("D:\\PDI_Project_testing\\Project-PDI-_Team4\\Pictures\\image.png");
         Image I2 = I1.getImage().getScaledInstance(100, 100, DO_NOTHING_ON_CLOSE);
         ImageIcon I3 = new ImageIcon(I2);
         JLabel label = new JLabel(I3);
@@ -193,7 +193,7 @@ public class signupTwo extends JFrame implements ActionListener {
             String pinNumber = "" + (100 + new Random().nextInt(900)); // Ensures 3-digit number
 
             try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankmanagementsystem",
-                    "root", "!@ann2024@!")) {
+                    "root", "khemchhun250306")) {
 
                 String query1 = "INSERT INTO signupTwo (form, country, Sreligion, Income, Education, jobss, Pan, ID, SeniorCitizen, ExistingAccount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement ps1 = conn.prepareStatement(query1);
@@ -218,7 +218,7 @@ public class signupTwo extends JFrame implements ActionListener {
 
                 JOptionPane.showMessageDialog(null, "Card number: " + cardNumber + "\nPIN: " + pinNumber);
                 setVisible(false);
-                new Transaction(form).setVisible(true);
+                new Login().setVisible(true);
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
