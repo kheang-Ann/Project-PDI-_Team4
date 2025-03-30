@@ -30,7 +30,7 @@ public class Deposit extends JFrame implements ActionListener {
 
         text = new JLabel("Deposit");
         text.setFont(new Font("Tahoma", Font.BOLD, 25));
-        text.setBounds(195, 10, 200, 40);
+        text.setBounds(210, 10, 200, 40);
         add(text);
 
         amount = new JLabel("Amount: ");

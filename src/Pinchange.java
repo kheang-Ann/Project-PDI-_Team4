@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 import java.sql.ResultSet;
+import javax.swing.*;
 
 public class Pinchange extends JFrame implements ActionListener {
     JLabel text, pintext, repeat;
@@ -13,7 +13,7 @@ public class Pinchange extends JFrame implements ActionListener {
         this.pinchange = pinchange;
         setLayout(null);
 
-        ImageIcon image = new ImageIcon("Project-PDI-_Team4/Pictures/ITC.png");
+        ImageIcon image = new ImageIcon("E:\\Java Y2\\Project(PDI)\\Pictures\\ITC.png");
         setIconImage(image.getImage());
 
         text = new JLabel("CHANGE YOUR PIN");
@@ -63,7 +63,7 @@ public class Pinchange extends JFrame implements ActionListener {
         change.setFont(new Font("Tahoma", Font.BOLD, 20));
         change.setBounds(150, 300, 200, 40);
         change.setBackground(Color.green);
-        change.setForeground(Color.BLACK);
+        change.setForeground(Color.WHITE);
         change.setFocusable(false);
         change.addActionListener(this);
         change.setFocusable(false);
@@ -73,7 +73,7 @@ public class Pinchange extends JFrame implements ActionListener {
         back.setFont(new Font("Tahoma", Font.BOLD, 20));
         back.setBounds(150, 350, 200, 40);
         back.setBackground(Color.RED);
-        back.setForeground(Color.BLACK);
+        back.setForeground(Color.WHITE);
         back.setFocusable(false);
         back.addActionListener(this);
         back.setFocusable(false);

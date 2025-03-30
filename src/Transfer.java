@@ -224,6 +224,8 @@ public class Transfer extends JFrame implements ActionListener {
                     if (set.next()) {
                         setVisible(false);
                         transferMoney();
+                        setVisible(false);
+                        new Transaction(pin).setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "Incorrect pin number!");
                     }
