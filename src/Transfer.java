@@ -182,18 +182,22 @@ public class Transfer extends JFrame implements ActionListener {
 
             pins = new JButton("Verify");
             pins.setBounds(150, 150, 100, 40);
+            pins.setForeground(Color.WHITE);
+            pins.setBackground(Color.BLUE);
             pins.setFocusable(false);
             pins.addActionListener(this);
             add(pins);
 
             Back = new JButton("Back");
             Back.setBounds(150, 200, 100, 40);
+            Back.setForeground(Color.WHITE);
+            Back.setBackground(Color.RED);
             Back.setFocusable(false);
             Back.addActionListener(this);
             add(Back);
 
             setTitle("Verify the pin");
-            setSize(400, 300);
+            setSize(420, 300);
             setLocation(300, 0);
             setResizable(false);
             setLocationRelativeTo(null);

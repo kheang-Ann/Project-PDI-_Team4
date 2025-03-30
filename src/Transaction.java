@@ -52,14 +52,14 @@ public class Transaction extends JFrame implements ActionListener {
         Image E1 = E.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         ImageIcon E2 = new ImageIcon(E1);
 
-        setSize(800, 800);
+        setSize(835, 800);
         setLocation(300, 0);
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.decode("#00BD99"));
 
         Bank_acc = new JLabel("Bank Account System");
         Bank_acc.setFont(new Font("Tahoma", Font.BOLD, 25));
-        Bank_acc.setBounds(265, 200, 300, 40);
+        Bank_acc.setBounds(268, 200, 300, 40);
         add(Bank_acc);
 
         // Balance Label

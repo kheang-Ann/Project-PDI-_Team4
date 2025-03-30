@@ -112,7 +112,7 @@ public class Withdraw extends JFrame implements ActionListener {
                     // Update the balance in the Transaction class
                     transaction.withdrawMoney(amount);
 
-                    JOptionPane.showMessageDialog(null, "USD " + amount + " withdrawn successfully.");
+                    JOptionPane.showMessageDialog(null, "USD " + amount + " withdraw successfully.");
                     setVisible(false);
                     transaction.setVisible(true); // Return to the Transaction window
                 } catch (NumberFormatException e) {
