@@ -18,7 +18,7 @@ public class signupOne extends JFrame implements ActionListener{
 
         setLayout(null);
 
-        setSize(850, 800);
+        setSize(750, 800);
         setLocation(350, 10);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -199,6 +199,8 @@ public class signupOne extends JFrame implements ActionListener{
         //button next
         next = new JButton("Next");
         next.setBounds(570,670,70,40);
+        next.setBackground(Color.BLUE);
+        next.setForeground(Color.WHITE);
         next.setFocusable(false);
         next.addActionListener(this);
         add(next);

@@ -15,7 +15,7 @@ public class signupTwo extends JFrame implements ActionListener {
         this.form = form;
         setLayout(null);
 
-        setSize(850, 800);
+        setSize(750, 800);
         setLocation(350, 10);
         setLocationRelativeTo(null);
         setTitle("Sign Up");
@@ -164,12 +164,16 @@ public class signupTwo extends JFrame implements ActionListener {
 
         cancel = new JButton("Cancel");
         cancel.setBounds(570, 670, 100, 40);
+        cancel.setBackground(Color.RED);
+        cancel.setForeground(Color.WHITE);
         cancel.setFocusable(false);
         cancel.addActionListener(this);
         add(cancel);
 
         submit = new JButton("Submit");
         submit.setBounds(420, 670, 100, 40);
+        submit.setBackground(Color.BLUE);
+        submit.setForeground(Color.WHITE);
         submit.setFocusable(false);
         submit.addActionListener(this);
         add(submit);

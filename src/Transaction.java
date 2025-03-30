@@ -126,7 +126,7 @@ public class Transaction extends JFrame implements ActionListener {
         exit.setFocusable(false);
         add(exit);
 
-        logout = new JButton("Logout", L2);
+        logout = new JButton("Log out", L2);
         logout.setFont(new Font("Tahoma", Font.BOLD, 20));
         logout.setBounds(280,600,250,40);
         logout.setForeground(Color.WHITE);
